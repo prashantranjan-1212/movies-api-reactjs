@@ -1,23 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+import Counter from './component/counter';
+import GenreSelect from './component/genreSelect';
+import SearchForm from './component/searchForm';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='App-header'>
+        <Counter initilaValue={10} />
+        <SearchForm />
+        <GenreSelect />
+      </div>
     </div>
   );
 }

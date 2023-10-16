@@ -1,0 +1,25 @@
+.genre-search-box {
+    box-sizing: border-box;
+    width: 50%;
+    height: 35px;
+    border: solid; 
+    margin: 20px;
+}
+
+.genre-search-button {
+    width: 100px;
+    height: 35px;
+    border: solid;
+    padding: 1px; 
+    margin: 1px;
+}
+
+.genre-selected-button {
+    background-color: DodgerBlue;
+    width: 100px;
+    height: 35px; 
+    border: solid; 
+    padding: 1px; 
+    margin: 1px;
+    
+}
