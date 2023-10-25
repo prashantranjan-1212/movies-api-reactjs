@@ -13,7 +13,7 @@ export default class Counter extends Component {
     return React.createElement(
       "div",
       "null",
-      React.createElement("h1", null, this.state.value),
+      React.createElement("h1", { "data-testid": "value" }, this.state.value),
       React.createElement(
         "button",
         {
@@ -22,6 +22,7 @@ export default class Counter extends Component {
               value: this.state.value + 1,
             }),
           className: "counter-button",
+          "data-testid": "increment",
         },
         "Increment"
       ),
@@ -33,6 +34,7 @@ export default class Counter extends Component {
               value: this.state.value - 1,
             }),
           className: "counter-button",
+          "data-testid": "decrement",
         },
         "Decrement"
       )

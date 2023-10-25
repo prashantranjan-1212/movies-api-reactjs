@@ -1,7 +1,7 @@
 import { fireEvent, render } from "@testing-library/react";
 import GenreSelect from "./genreSelect";
 
-test("renders GenreSelect component", () => {
+test("renders GenreSelect component with all props", () => {
   const genres = [
     "Comedy",
     "Sci-fi",
@@ -10,13 +10,18 @@ test("renders GenreSelect component", () => {
     "Action",
     "Documentary",
   ];
-  const { getByPlaceholderText } = render(<GenreSelect genres={genres} />);
 
-  const inputElement = getByPlaceholderText("Search Genre");
-  expect(inputElement).toBeInTheDocument();
+  const { getByTestId } = render(
+    <GenreSelect genres={genres} selectedGenre="" onSelect={() => {}} />
+  );
+
+  genres.forEach((genre) => {
+    const genreButton = getByTestId(genre);
+    expect(genreButton).toBeInTheDocument();
+  });
 });
 
-test("genre button is clicked", () => {
+test("Highlight slected genre button", () => {
   const genres = [
     "Comedy",
     "Sci-fi",
@@ -25,12 +30,21 @@ test("genre button is clicked", () => {
     "Action",
     "Documentary",
   ];
-  const { getByText } = render(<GenreSelect genres={genres} />);
-  const actionButton = getByText("Action");
-  fireEvent.click(actionButton);
+  const selectedGenre = "Documentary";
+
+  const { getByTestId } = render(
+    <GenreSelect
+      genres={genres}
+      selectedGenre={selectedGenre}
+      onSelect={() => {}}
+    />
+  );
+
+  const genreButton = getByTestId(selectedGenre);
+  expect(genreButton).toHaveStyle("background-color: DodgerBlue");
 });
 
-test("genre is typed in the input field", () => {
+test("test onselect callback function", () => {
   const genres = [
     "Comedy",
     "Sci-fi",
@@ -39,5 +53,20 @@ test("genre is typed in the input field", () => {
     "Action",
     "Documentary",
   ];
-  render(<GenreSelect genres={genres} />);
+  const selectedGenre = "Action";
+  const onSelect = jest.fn();
+
+  const { getByTestId } = render(
+    <GenreSelect
+      genres={genres}
+      selectedGenre={selectedGenre}
+      onSelect={onSelect}
+    />
+  );
+
+  const genreButton = getByTestId(selectedGenre);
+  fireEvent.click(genreButton);
+
+  expect(genreButton).toHaveStyle("background-color: DodgerBlue");
+  expect(onSelect).toHaveBeenCalledWith(selectedGenre);
 });

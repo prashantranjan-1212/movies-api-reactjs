@@ -14,6 +14,7 @@ export default class SearchForm extends Component {
       <>
         <div>
           <input
+            data-testid="search-input"
             className="search-box"
             type="search"
             placeholder={this.state.searchValue}
@@ -34,6 +35,7 @@ export default class SearchForm extends Component {
         </div>
         <div>
           <button
+            data-testid="search-button"
             className="search-button"
             onClick={(event) => {
               window.alert(this.state.searchValue);

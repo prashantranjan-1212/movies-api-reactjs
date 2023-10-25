@@ -1,34 +1,38 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import SearchForm from "./searchForm";
 
 test("renders SearchForm component", () => {
-  const searchValue = "Search Placeholder";
-  const { getByText, getByPlaceholderText } = render(
-    <SearchForm searchValue={searchValue} />
-  );
-  const inputElement = getByPlaceholderText(searchValue);
+  const searchValue = "search movie";
+  const { getByTestId } = render(<SearchForm searchValue={searchValue} />);
+
+  const inputElement = getByTestId("search-input");
   expect(inputElement).toBeInTheDocument();
-  const searchButton = getByText("Search");
+
+  const searchButton = getByTestId("search-button");
   expect(searchButton).toBeInTheDocument();
 });
 
 test("text is entered in the input field", () => {
-  const searchValue = "Search Placeholder";
-  const { getByPlaceholderText } = render(
-    <SearchForm searchValue={searchValue} />
-  );
-  const inputElement = getByPlaceholderText(searchValue);
+  const searchValue = "search movie";
+  const { getByTestId } = render(<SearchForm searchValue={searchValue} />);
+
+  const inputElement = getByTestId("search-input");
   fireEvent.change(inputElement, { target: { value: "New Search" } });
   expect(inputElement.value).toBe("New Search");
 });
 
 test("alert when Search button is clicked", () => {
-  const searchValue = "Search Placeholder";
-  const { getByText, getByPlaceholderText } = render(
-    <SearchForm searchValue={searchValue} />
-  );
-  const inputElement = getByPlaceholderText(searchValue);
-  const searchButton = getByText("Search");
+  window.alert = jest.fn();
+  const searchValue = "search movie";
+  const { getByTestId } = render(<SearchForm searchValue={searchValue} />);
+
+  const inputElement = getByTestId("search-input");
+  const searchButton = getByTestId("search-button");
+
   fireEvent.change(inputElement, { target: { value: "New Search" } });
   fireEvent.click(searchButton);
+
+  waitFor(() => {
+    expect(window.alert).toHaveBeenCalledWith("New Search");
+  });
 });

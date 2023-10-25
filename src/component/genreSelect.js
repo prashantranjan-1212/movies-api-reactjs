@@ -14,6 +14,7 @@ export default class GenreSelect extends Component {
           return (
             <button
               key={index}
+              data-testid={genre}
               onClick={() => onSelect(genre)}
               style={{
                 backgroundColor:
