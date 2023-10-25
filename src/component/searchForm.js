@@ -11,7 +11,7 @@ export default class SearchForm extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <div>
           <input
             className="search-box"
@@ -42,7 +42,7 @@ export default class SearchForm extends Component {
             Search
           </button>
         </div>
-      </div>
+      </>
     );
   }
 }
