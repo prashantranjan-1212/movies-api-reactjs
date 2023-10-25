@@ -16,7 +16,7 @@ test("renders GenreSelect component", () => {
   expect(inputElement).toBeInTheDocument();
 });
 
-test("updates the selectedButton state when a genre button is clicked", () => {
+test("genre button is clicked", () => {
   const genres = [
     "Comedy",
     "Sci-fi",
@@ -30,7 +30,7 @@ test("updates the selectedButton state when a genre button is clicked", () => {
   fireEvent.click(actionButton);
 });
 
-test("updates the selectedButton state when a genre is typed in the input field", () => {
+test("genre is typed in the input field", () => {
   const genres = [
     "Comedy",
     "Sci-fi",
