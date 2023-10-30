@@ -1,11 +1,11 @@
 import { Component } from "react";
 import "./App.css";
-import Counter from "./component/counter";
-import GenreSelect from "./component/genreSelect";
-import SearchForm from "./component/searchForm";
-import MovieTile from "./component/movieTile";
-import MovieDetails from "./component/movieDetails";
-import SortControl from "./component/sortControl";
+import Counter from "./component/counter/counter.component";
+import GenreSelect from "./component/genre-select/genre-select.component";
+import SearchForm from "./component/search-form/search-form.component";
+import MovieTile from "./component/movie-tile/movie-tile.component";
+import MovieDetails from "./component/movie-tile/movie-tile.component";
+import SortControl from "./component/sort-control/sort-control.component";
 
 class App extends Component {
   constructor() {
