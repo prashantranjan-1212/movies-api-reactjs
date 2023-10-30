@@ -9,6 +9,16 @@ export default {
 };
 
 export const Default = {
+  args: { ...GenreSelect.defaultProps },
+};
+
+export const Genre = {
+  args: {
+    genres: ["Fantasy", "Thriller", "Action", "Documentary"],
+  },
+};
+
+export const GenreWithValue = {
   args: {
     genres: [
       "Comedy",
@@ -18,5 +28,6 @@ export const Default = {
       "Action",
       "Documentary",
     ],
+    selectedGenre: "Thriller",
   },
 };

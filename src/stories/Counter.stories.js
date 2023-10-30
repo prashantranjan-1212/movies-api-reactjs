@@ -8,6 +8,10 @@ export default {
   },
 };
 
+export const Default = {
+  args: { ...Counter.defaultProps },
+};
+
 export const WithValue = {
   args: {
     initialValue: 10,

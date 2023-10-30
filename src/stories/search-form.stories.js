@@ -8,8 +8,10 @@ export default {
   },
 };
 
-export const Default = {
+export const Default = { args: { ...SearchForm.defaultProps } };
+
+export const WithSearchValue = {
   args: {
-    searchValue: "search movies",
+    searchValue: "Gadaar",
   },
 };

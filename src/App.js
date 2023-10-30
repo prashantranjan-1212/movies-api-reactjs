@@ -72,13 +72,13 @@ class App extends Component {
             selectedGenre={selectedGenre}
             onSelect={genreSelectHandler}
           />
-          {movies.map(({ imageUrl, releaseYear, genres, movieName }) => {
+          {movies.map((movie) => {
             return (
               <MovieTile
-                imageUrl={imageUrl}
-                movieName={movieName}
-                releaseYear={releaseYear}
-                genres={genres}
+                imageUrl={movie.imageUrl}
+                movieName={movie.movieName}
+                releaseYear={movie.releaseYear}
+                genres={movie.genres}
                 onMovieClick={handleMovieClick}
               />
             );

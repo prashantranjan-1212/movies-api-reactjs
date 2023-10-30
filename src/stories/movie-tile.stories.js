@@ -9,11 +9,14 @@ export default {
 };
 
 export const Default = {
+  args: { ...MovieTile.defaultProps },
+};
+
+export const WithValue = {
   args: {
-    imageUrl: "",
-    movieName: "",
-    releaseYear: "",
-    genres: "",
-    onMovieClick: "",
+    imageUrl: "https://robohash.org/1?set=set2&size=180x180",
+    movieName: "Pathan",
+    releaseYear: new Date().toLocaleDateString(),
+    genres: ["Action", "Thriller", "Adventure"],
   },
 };

@@ -9,12 +9,16 @@ export default {
 };
 
 export const Default = {
+  args: { ...MovieDetails.defaultProps },
+};
+
+export const WithValue = {
   args: {
-    imageUrl: "",
-    movieName: "",
-    releaseYear: "",
-    rating: "",
-    duration: "",
-    description: "",
+    imageUrl: "https://robohash.org/1?set=set2&size=180x180",
+    movieName: "Pathan",
+    releaseYear: new Date().toLocaleDateString(),
+    rating: 4.5,
+    duration: 180,
+    description: "Spy and Action",
   },
 };

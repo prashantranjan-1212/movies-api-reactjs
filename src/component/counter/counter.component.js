@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./counter.style.css";
+import PropTypes from "prop-types";
 
 class Counter extends Component {
   constructor(props) {
@@ -43,3 +44,11 @@ class Counter extends Component {
 }
 
 export default Counter;
+
+Counter.propTypes = {
+  initialValue: PropTypes.number.isRequired,
+};
+
+Counter.defaultProps = {
+  initialValue: 0,
+};

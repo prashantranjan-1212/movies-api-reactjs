@@ -9,8 +9,12 @@ export default {
 };
 
 export const Default = {
+  args: { ...SortControl.defaultProps },
+};
+
+export const WithValue = {
   args: {
-    releaseDate: "",
-    title: "",
+    title: "12th Fail",
+    releaseDate: new Date().toLocaleDateString(),
   },
 };

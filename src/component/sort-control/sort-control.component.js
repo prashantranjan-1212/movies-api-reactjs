@@ -1,4 +1,5 @@
 import "./sort-control.style.css";
+import PropTypes from "prop-types";
 
 const SortControl = ({ releaseDate, title, onSortControl }) => {
   return (
@@ -13,3 +14,15 @@ const SortControl = ({ releaseDate, title, onSortControl }) => {
 };
 
 export default SortControl;
+
+SortControl.propTypes = {
+  title: PropTypes.string.isRequired,
+  releaseDate: PropTypes.instanceOf(Date).isRequired,
+  onSortControl: PropTypes.func,
+};
+
+SortControl.defaultProps = {
+  title: "Pathan",
+  releaseDate: new Date().toLocaleDateString(),
+  onSortControl: () => {},
+};

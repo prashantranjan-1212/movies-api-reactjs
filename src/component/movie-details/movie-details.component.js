@@ -1,4 +1,5 @@
 import "./movie-details.style.css";
+import PropTypes from "prop-types";
 
 const MovieDetails = (
   imageUrl,
@@ -25,3 +26,21 @@ const MovieDetails = (
 };
 
 export default MovieDetails;
+
+MovieDetails.propTypes = {
+  imageUrl: PropTypes.string.isRequired,
+  movieName: PropTypes.string.isRequired,
+  releaseYear: PropTypes.instanceOf(Date).isRequired,
+  rating: PropTypes.number.isRequired,
+  duration: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
+};
+
+MovieDetails.defaultProps = {
+  imageUrl: "https://robohash.org/1?set=set2&size=180x180",
+  movieName: "ROBO Corp",
+  releaseYear: new Date().toLocaleDateString(),
+  rating: 3,
+  duration: 120,
+  description: "Robo Movie and Fantasy",
+};
