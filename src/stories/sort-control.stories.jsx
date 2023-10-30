@@ -15,6 +15,6 @@ export const Default = {
 export const WithValue = {
   args: {
     title: "12th Fail",
-    releaseDate: new Date().toLocaleDateString(),
+    releaseDate: new Date(2023, 9, 27),
   },
 };

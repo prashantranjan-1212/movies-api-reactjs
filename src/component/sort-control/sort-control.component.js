@@ -6,7 +6,7 @@ const SortControl = ({ releaseDate, title, onSortControl }) => {
     <div>
       <label>Sort By : </label>
       <select onChange={onSortControl}>
-        <option value={releaseDate}>Release Date</option>
+        <option value={releaseDate.toLocaleDateString()}>Release Date</option>
         <option value={title}>Title</option>
       </select>
     </div>
@@ -23,6 +23,6 @@ SortControl.propTypes = {
 
 SortControl.defaultProps = {
   title: "Pathan",
-  releaseDate: new Date().toLocaleDateString(),
+  releaseDate: new Date(2023, 1, 26),
   onSortControl: () => {},
 };

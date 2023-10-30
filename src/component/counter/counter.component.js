@@ -13,7 +13,7 @@ class Counter extends Component {
   render() {
     return React.createElement(
       "div",
-      "null",
+      { id: "counter" },
       React.createElement("h1", { "data-testid": "value" }, this.state.value),
       React.createElement(
         "button",

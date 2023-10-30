@@ -1,22 +1,22 @@
 import "./movie-details.style.css";
 import PropTypes from "prop-types";
 
-const MovieDetails = (
+const MovieDetails = ({
   imageUrl,
   movieName,
-  releaseYear,
+  releaseDate,
   rating,
   duration,
-  description
-) => {
+  description,
+}) => {
   return (
-    <div movie-details>
-      <div movie-poster>
+    <div className="movie-details">
+      <div className="movie-poster">
         <img src={imageUrl} alt={movieName} />
       </div>
-      <div movie-info>
+      <div className="movie-info">
         <h2>{movieName}</h2>
-        <p>Release Year : {releaseYear}</p>
+        <p>Release Year : {releaseDate.toLocaleDateString()}</p>
         <p>Rating : {rating}</p>
         <p>Duartion : {duration}</p>
         <p>Description : {description}</p>
@@ -30,7 +30,7 @@ export default MovieDetails;
 MovieDetails.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   movieName: PropTypes.string.isRequired,
-  releaseYear: PropTypes.instanceOf(Date).isRequired,
+  releaseDate: PropTypes.instanceOf(Date).isRequired,
   rating: PropTypes.number.isRequired,
   duration: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
@@ -39,7 +39,7 @@ MovieDetails.propTypes = {
 MovieDetails.defaultProps = {
   imageUrl: "https://robohash.org/1?set=set2&size=180x180",
   movieName: "ROBO Corp",
-  releaseYear: new Date().toLocaleDateString(),
+  releaseDate: new Date(2010, 2, 24),
   rating: 3,
   duration: 120,
   description: "Robo Movie and Fantasy",

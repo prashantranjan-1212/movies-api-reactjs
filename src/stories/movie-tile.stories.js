@@ -16,7 +16,7 @@ export const WithValue = {
   args: {
     imageUrl: "https://robohash.org/1?set=set2&size=180x180",
     movieName: "Pathan",
-    releaseYear: new Date().toLocaleDateString(),
+    releaseDate: new Date(2023, 1, 26),
     genres: ["Action", "Thriller", "Adventure"],
   },
 };

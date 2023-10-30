@@ -27,7 +27,7 @@ export default GenreSelect;
 
 GenreSelect.propTypes = {
   genres: PropTypes.array.isRequired,
-  selectedGenre: PropTypes.string.isRequired,
+  selectedGenre: PropTypes.string,
   onSelect: PropTypes.func.isRequired,
 };
 
