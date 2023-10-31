@@ -89,18 +89,20 @@ class App extends Component {
             releaseDate={movies[0].releaseDate}
             onSortControl={onSortHandler}
           />
-          {movies.map((movie) => {
-            return (
-              <MovieTile
-                key={movie.id}
-                imageUrl={movie.imageUrl}
-                movieName={movie.movieName}
-                releaseDate={movie.releaseDate}
-                genres={movie.genres}
-                onMovieClick={handleMovieClick}
-              />
-            );
-          })}
+          <div className="movie-tile-conatiner">
+            {movies.map((movie) => {
+              return (
+                <MovieTile
+                  key={movie.id}
+                  imageUrl={movie.imageUrl}
+                  movieName={movie.movieName}
+                  releaseDate={movie.releaseDate}
+                  genres={movie.genres}
+                  onMovieClick={handleMovieClick}
+                />
+              );
+            })}
+          </div>
           <MovieDetails
             imageUrl={movies[0].imageUrl}
             movieName={movies[0].movieName}
