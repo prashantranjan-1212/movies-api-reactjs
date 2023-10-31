@@ -13,67 +13,100 @@ class App extends Component {
 
     this.state = {
       selectedGenre: null,
+      selectedMovie: {},
+      movies: [
+        {
+          id: 1,
+          imageUrl: "https://robohash.org/1?set=set2&size=180x180",
+          movieName: "10th Fail",
+          releaseDate: new Date(2023, 11, 26),
+          genres: ["Action", "Adventure"],
+          rating: 3.5,
+          duration: 125,
+          description: "Fantastic Movie",
+        },
+        {
+          id: 2,
+          imageUrl: "https://robohash.org/2?set=set2&size=180x180",
+          movieName: "11th Fail",
+          releaseDate: new Date(2020, 8, 27),
+          genres: ["Action", "Adventure"],
+          rating: 3.5,
+          duration: 125,
+          description: "Fantastic Movie",
+        },
+        {
+          id: 3,
+          imageUrl: "https://robohash.org/3?set=set2&size=180x180",
+          movieName: "12th Fail",
+          releaseDate: new Date(2010, 2, 23),
+          genres: ["Action", "Adventure"],
+          rating: 3.5,
+          duration: 125,
+          description: "Fantastic Movie",
+        },
+      ],
     };
   }
 
   genres = ["Comedy", "Sci-fi", "Fantasy", "Thriller", "Action", "Documentary"];
 
-  movies = [
-    {
-      id: 1,
-      imageUrl: "https://robohash.org/1?set=set2&size=180x180",
-      movieName: "10th Fail",
-      releaseDate: new Date(2010, 2, 23),
-      genres: ["Action", "Adventure"],
-      rating: 3.5,
-      duration: 125,
-      description: "Fantastic Movie",
-    },
-    {
-      id: 2,
-      imageUrl: "https://robohash.org/2?set=set2&size=180x180",
-      movieName: "11th Fail",
-      releaseDate: new Date(2020, 8, 27),
-      genres: ["Action", "Adventure"],
-      rating: 3.5,
-      duration: 125,
-      description: "Fantastic Movie",
-    },
-    {
-      id: 3,
-      imageUrl: "https://robohash.org/3?set=set2&size=180x180",
-      movieName: "12th Fail",
-      releaseDate: new Date(2023, 11, 26),
-      genres: ["Action", "Adventure"],
-      rating: 3.5,
-      duration: 125,
-      description: "Fantastic Movie",
-    },
-  ];
+  onSortHandler = (value) => {
+    if (value === "releaseDate") {
+      console.log("Sort By Release Date");
+      this.sortByReleaseDate();
+    } else if (value === "title") {
+      console.log("Sort By Title");
+      this.sortByTitle();
+    }
+  };
 
-  genreSelectHandler = (genre) => {
+  sortByReleaseDate = () => {
+    console.log("sortByReleaseDate function called");
+    const sortedMovieListByReleaseDate = this.state.movies.sort((a, b) => {
+      if (a.releaseDate < b.releaseDate) {
+        return -1;
+      }
+      if (a.releaseDate < b.releaseDate) {
+        return 1;
+      }
+      return 0;
+    });
     this.setState(() => {
-      return { selectedGenre: genre };
+      return { movies: sortedMovieListByReleaseDate };
     });
   };
 
-  handleMovieClick = (movieName) => {
-    console.log(movieName);
+  sortByTitle = () => {
+    console.log("sortByTitle function called");
+    const sortedMovieListByTitle = this.state.movies.sort((a, b) => {
+      if (a.movieName < b.movieName) {
+        return -1;
+      }
+      if (a.movieName < b.movieName) {
+        return 1;
+      }
+      return 0;
+    });
+    this.setState(() => {
+      return { movies: sortedMovieListByTitle };
+    });
   };
 
-  onSortHandler = () => {
-    console.log("Handler Called");
+  handleMovieClick = (value) => {
+    this.state.movies.forEach((movie) => {
+      if (movie.movieName === value) {
+        this.setState(() => {
+          return { selectedMovie: movie };
+        });
+      }
+    });
   };
 
   render() {
-    const {
-      genreSelectHandler,
-      handleMovieClick,
-      genres,
-      movies,
-      onSortHandler,
-    } = this;
-    const { selectedGenre } = this.state;
+    const { genreSelectHandler, handleMovieClick, genres, onSortHandler } =
+      this;
+    const { selectedGenre, selectedMovie, movies } = this.state;
     return (
       <div className="App">
         <div className="App-header">
@@ -85,9 +118,9 @@ class App extends Component {
             onSelect={genreSelectHandler}
           />
           <SortControl
-            title={movies[0].movieName}
-            releaseDate={movies[0].releaseDate}
-            onSortControl={onSortHandler}
+            title={"title"}
+            releaseDate={"releaseDate"}
+            onSortControl={(value) => onSortHandler(value)}
           />
           <div className="movie-tile-conatiner">
             {movies.map((movie) => {
@@ -104,12 +137,12 @@ class App extends Component {
             })}
           </div>
           <MovieDetails
-            imageUrl={movies[0].imageUrl}
-            movieName={movies[0].movieName}
-            releaseDate={movies[0].releaseDate}
-            rating={movies[0].rating}
-            duration={movies[0].duration}
-            description={movies[0].description}
+            imageUrl={selectedMovie.imageUrl}
+            movieName={selectedMovie.movieName}
+            releaseDate={selectedMovie.releaseDate}
+            rating={selectedMovie.rating}
+            duration={selectedMovie.duration}
+            description={selectedMovie.description}
           />
         </div>
       </div>

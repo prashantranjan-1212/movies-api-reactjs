@@ -15,6 +15,6 @@ export const Default = {
 export const WithValue = {
   args: {
     title: "12th Fail",
-    releaseDate: new Date(2023, 9, 27),
+    releaseDate: "2023/10/27",
   },
 };
