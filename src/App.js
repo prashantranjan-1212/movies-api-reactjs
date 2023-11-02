@@ -6,6 +6,8 @@ import SearchForm from "./component/search-form/search-form.component";
 import MovieTile from "./component/movie-tile/movie-tile.component";
 import MovieDetails from "./component/movie-details/movie-details.component";
 import SortControl from "./component/sort-control/sort-control.component";
+import Dialog from "./component/dialog/dialog.component";
+import MovieForm from "./component/movie-form/movie-form.component";
 
 class App extends Component {
   constructor() {
@@ -110,6 +112,8 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
+          <Dialog content={"Child Element"} />
+          <MovieForm {...movies[0]} />
           <Counter initialValue={10} />
           <SearchForm searchValue={"search movie"} />
           <GenreSelect
