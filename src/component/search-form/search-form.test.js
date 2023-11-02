@@ -1,5 +1,5 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
-import SearchForm from "./searchForm";
+import SearchForm from "./search-form.component";
 
 test("renders SearchForm component", () => {
   const searchValue = "search movie";

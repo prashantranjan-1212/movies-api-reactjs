@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import Counter from "./counter";
+import Counter from "./counter.component";
 
 test("renders Counter component", () => {
   const { getByTestId } = render(<Counter initialValue={0} />);

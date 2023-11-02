@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import "../App.css";
+import "./counter.style.css";
+import PropTypes from "prop-types";
 
-export default class Counter extends Component {
+class Counter extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,7 +13,7 @@ export default class Counter extends Component {
   render() {
     return React.createElement(
       "div",
-      "null",
+      { id: "counter" },
       React.createElement("h1", { "data-testid": "value" }, this.state.value),
       React.createElement(
         "button",
@@ -41,3 +42,13 @@ export default class Counter extends Component {
     );
   }
 }
+
+export default Counter;
+
+Counter.propTypes = {
+  initialValue: PropTypes.number.isRequired,
+};
+
+Counter.defaultProps = {
+  initialValue: 0,
+};

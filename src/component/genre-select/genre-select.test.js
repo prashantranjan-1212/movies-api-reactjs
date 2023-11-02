@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import GenreSelect from "./genreSelect";
+import GenreSelect from "./genre-select.component";
 
 test("renders GenreSelect component with all props", () => {
   const genres = [
