@@ -1,0 +1,25 @@
+.dialog-conatiner {
+  text-align: center;
+
+  .dialog-title {
+    display: flex;
+
+    .dialog-button {
+      position: absolute;
+      right: 15px;
+      color: #131212;
+      text-decoration: none;
+      font-size: 20px;
+    }
+  }
+  .dialog-content {
+    background-color: white;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #888888;
+    width: 70%;
+    font-weight: bolder;
+    display: flex;
+    flex-direction: row;
+  }
+}

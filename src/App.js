@@ -1,13 +1,16 @@
 import { Component } from "react";
-import "./App.css";
+import "./App.scss";
 import Counter from "./component/counter/counter.component";
 import GenreSelect from "./component/genre-select/genre-select.component";
 import SearchForm from "./component/search-form/search-form.component";
 import MovieTile from "./component/movie-tile/movie-tile.component";
 import MovieDetails from "./component/movie-details/movie-details.component";
 import SortControl from "./component/sort-control/sort-control.component";
-import Dialog from "./component/dialog/dialog.component";
+import AddMovie from "./component/add-movie/add-movie.component";
+import EditMovie from "./component/edit-movie/edit-movie.component";
+import DeleteMovie from "./component/delete-movie/delete-movie.component";
 import MovieForm from "./component/movie-form/movie-form.component";
+import Dialog from "./component/dialog/dialog.component";
 
 class App extends Component {
   constructor() {
@@ -16,6 +19,7 @@ class App extends Component {
     this.state = {
       selectedGenre: null,
       selectedMovie: {},
+      dialogOpen: false,
       movies: [
         {
           id: 1,
@@ -48,6 +52,15 @@ class App extends Component {
           description: "Fantastic Movie",
         },
       ],
+      movie: {
+        title: "",
+        releaseDate: "",
+        movieUrl: "",
+        rating: "",
+        genre: "",
+        runtime: "",
+        overview: "",
+      },
     };
   }
 
@@ -105,16 +118,29 @@ class App extends Component {
     });
   };
 
+  handleFormSubmit = (formData) => {
+    console.log(formData);
+  };
+
   render() {
-    const { genreSelectHandler, handleMovieClick, genres, onSortHandler } =
-      this;
+    const {
+      genreSelectHandler,
+      handleMovieClick,
+      genres,
+      onSortHandler,
+      handleFormSubmit,
+    } = this;
     const { selectedGenre, selectedMovie, movies } = this.state;
     return (
       <div className="App">
         <div className="App-header">
-          <Dialog content={"Child Element"} />
-          <MovieForm {...movies[0]} />
-          <Counter initialValue={10} />
+          <div className="movie-control-button">
+            <AddMovie />
+            <EditMovie />
+            <DeleteMovie />
+          </div>
+          <div id="movie-portal" />
+          <MovieForm movieInfo={this.state.movie} onSubmit={handleFormSubmit} />
           <SearchForm searchValue={"search movie"} />
           <GenreSelect
             genres={genres}
