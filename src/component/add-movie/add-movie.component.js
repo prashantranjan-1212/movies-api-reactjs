@@ -2,6 +2,7 @@ import "./add-movie.style.scss";
 import { useState } from "react";
 import Dialog from "../dialog/dialog.component";
 import MovieForm from "../movie-form/movie-form.component";
+import PropTypes from "prop-types";
 
 const AddMovie = () => {
   const [dialogOpen, setDialogOpen] = useState(false);

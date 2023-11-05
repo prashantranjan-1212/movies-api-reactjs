@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./movie-form.style.scss";
+import PropTypes from "prop-types";
 
 const MovieForm = ({ movieInfo, onSubmit }) => {
   const [title, setTitle] = useState(movieInfo.title || "");
@@ -84,3 +85,13 @@ const MovieForm = ({ movieInfo, onSubmit }) => {
 };
 
 export default MovieForm;
+
+MovieForm.propTypes = {
+  movieInfo: PropTypes.object,
+  onSubmit: PropTypes.func.isRequired,
+};
+
+MovieForm.defaultProps = {
+  movieInfo: {},
+  onSubmit: () => {},
+};

@@ -1,5 +1,6 @@
 import "./dialog.style.scss";
 import { Portal } from "react-portal";
+import PropTypes from "prop-types";
 
 const Dialog = ({ title, content, handleCloseButton }) => {
   return (
@@ -18,3 +19,15 @@ const Dialog = ({ title, content, handleCloseButton }) => {
 };
 
 export default Dialog;
+
+Dialog.propTypes = {
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  handleCloseButton: PropTypes.func.isRequired,
+};
+
+Dialog.defaultProps = {
+  title: "Dialog Title",
+  content: "Dialog Content",
+  handleCloseButton: () => {},
+};
