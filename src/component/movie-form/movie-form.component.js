@@ -18,32 +18,36 @@ const MovieForm = ({ movieInfo, onSubmit }) => {
   };
 
   return (
-    <div className="movie-form-conatiner">
+    <div className="movie-form-conatiner" data-testid="movie-form-conatiner">
       <form onSubmit={handleMovieSubmit}>
-        <label>Title</label>
+        <label data-testid="title-label">Title</label>
         <input
+          data-testid="title-input"
           type="text"
           name="title"
           value={title}
           placeholder="Movie Title "
           onChange={(event) => setTitle(event.target.value)}
         ></input>
-        <label>Release Date</label>
+        <label data-testid="release-date-label">Release Date</label>
         <input
+          data-testid="release-date-input"
           type="date"
           name="releaseDate"
           value={releaseDate}
           onChange={(event) => setReleaseDate(event.target.value)}
         ></input>
-        <label>Movie Url</label>
+        <label data-testid="movie-url-label">Movie Url</label>
         <input
+          data-testid="movie-url-input"
           type="url"
           name="movieUrl"
           value={movieUrl}
           onChange={(event) => setMovieUrl(event.target.value)}
         ></input>
-        <label>Rating</label>
+        <label data-testid="rating-label">Rating</label>
         <input
+          data-testid="rating-input"
           type="number"
           name="rating"
           min="0"
@@ -51,8 +55,9 @@ const MovieForm = ({ movieInfo, onSubmit }) => {
           value={rating}
           onChange={(event) => setRating(event.target.value)}
         ></input>
-        <label>Genre</label>
+        <label data-testid="genre-label">Genre</label>
         <select
+          data-testid="genre-select"
           value={genre}
           name="genre"
           onChange={(event) => setGenre(event.target.value)}
@@ -65,20 +70,22 @@ const MovieForm = ({ movieInfo, onSubmit }) => {
           <option value="Adventure">Adventure</option>
           <option value="Sci-Fi">Sci-Fi</option>
         </select>
-        <label>Runtime</label>
+        <label data-testid="runtime-label">Runtime</label>
         <input
+          data-testid="runtime-input"
           type="text"
           name="runtime"
           value={runtime}
           onChange={(event) => setRuntime(event.target.value)}
         ></input>
-        <label>Overview</label>
+        <label data-testid="overview-label">Overview</label>
         <textarea
+          data-testid="overview-textarea"
           value={overview}
           name="overview"
           onChange={(event) => setOverview(event.target.value)}
         />
-        <button>Submit</button>
+        <button data-testid="movie-form-submit">Submit</button>
       </form>
     </div>
   );

@@ -11,9 +11,13 @@ const DeleteMovie = () => {
     setDialogOpen(false);
   };
   return (
-    <div className="delete-movie-container">
+    <div
+      className="delete-movie-container"
+      data-testid="delete-movie-container"
+    >
       <button
         className="delete-movie-button"
+        data-testid="delete-movie-button"
         onClick={() => setDialogOpen(true)}
       >
         Delete Movie

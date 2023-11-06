@@ -13,8 +13,12 @@ const AddMovie = () => {
   };
 
   return (
-    <div className="add-movie-container">
-      <button className="add-movie-button" onClick={() => setDialogOpen(true)}>
+    <div className="add-movie-container" data-testid="add-movie-container">
+      <button
+        className="add-movie-button"
+        data-testid="add-movie-button"
+        onClick={() => setDialogOpen(true)}
+      >
         Add Movie
       </button>
       {dialogOpen && (

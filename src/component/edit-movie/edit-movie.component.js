@@ -12,8 +12,12 @@ const EditMovie = () => {
   };
 
   return (
-    <div className="edit-movie-container">
-      <button className="edit-movie-button" onClick={() => setDialogOpen(true)}>
+    <div className="edit-movie-container" data-testid="edit-movie-container">
+      <button
+        className="edit-movie-button"
+        data-testid="edit-movie-button"
+        onClick={() => setDialogOpen(true)}
+      >
         Edit Movie
       </button>
       {dialogOpen && (
