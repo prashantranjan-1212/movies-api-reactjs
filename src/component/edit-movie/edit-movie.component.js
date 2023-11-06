@@ -23,7 +23,6 @@ const EditMovie = () => {
       {dialogOpen && (
         <Dialog
           title={"Edit Movie"}
-          content={"Edit Movie"}
           handleCloseButton={() => setDialogOpen(false)}
         >
           <MovieForm onSubmit={handleMovieSubmit}></MovieForm>

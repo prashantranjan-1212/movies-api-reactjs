@@ -1,25 +1,34 @@
 .dialog-conatiner {
-  text-align: center;
+  width: 70%;
+  display: inline-block;
+  margin: 10px;
+  border: 1px solid rgb(250, 178, 192);
+  border-radius: 10px;
 
   .dialog-title {
-    display: flex;
+    display: inline-flex;
+    flex-direction: row;
+    font-size: x-large;
+    font-weight: bold;
+    padding-left: 10px;
 
     .dialog-button {
       position: absolute;
-      right: 15px;
-      color: #131212;
-      text-decoration: none;
-      font-size: 20px;
+      font-size: x-large;
+      font-weight: bold;
+      margin: 1px 1px 40px 300px;
+      border: none;
+      background-color: white;
     }
   }
-  .dialog-content {
-    background-color: white;
-    margin: 10px;
-    padding: 20px;
-    border: 1px solid #888888;
-    width: 70%;
-    font-weight: bolder;
-    display: flex;
-    flex-direction: row;
+  .dialog-children {
+    .delete-movie-confirm-button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
   }
 }

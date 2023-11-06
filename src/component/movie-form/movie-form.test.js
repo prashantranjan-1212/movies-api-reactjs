@@ -17,7 +17,7 @@ test("renders Movie Form component", () => {
     <MovieForm movieInfo={movieInfo} onSubmit={onSubmit} />
   );
 
-  const movieFormConatiner = getByTestId("movie-form-conatiner");
+  const movieFormConatiner = getByTestId("movie-form-container");
   expect(movieFormConatiner).toBeInTheDocument();
 
   const titleLable = getByTestId("title-label");

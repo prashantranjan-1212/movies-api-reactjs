@@ -18,7 +18,7 @@ const MovieForm = ({ movieInfo, onSubmit }) => {
   };
 
   return (
-    <div className="movie-form-conatiner" data-testid="movie-form-conatiner">
+    <div className="movie-form-container" data-testid="movie-form-container">
       <form onSubmit={handleMovieSubmit}>
         <label data-testid="title-label">Title</label>
         <input

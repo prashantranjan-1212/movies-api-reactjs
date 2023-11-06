@@ -1,13 +1,16 @@
-.movie-form-conatiner {
-  max-width: 400px;
+.movie-form-container {
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  background-color: gainsboro;
 
   label {
-    display: block;
+    display: flex;
+    flex-flow: wrap;
     margin-top: 10px;
+    font-size: large;
+    font-weight: bold;
   }
 
   input[type="text"],

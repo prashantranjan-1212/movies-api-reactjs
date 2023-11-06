@@ -24,7 +24,6 @@ const AddMovie = () => {
       {dialogOpen && (
         <Dialog
           title={"Add Movie"}
-          content={"Add Movie"}
           handleCloseButton={() => setDialogOpen(false)}
         >
           <MovieForm onSubmit={handleMovieSubmit}></MovieForm>
