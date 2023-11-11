@@ -1,11 +1,13 @@
 import { Component } from "react";
-import "./App.css";
-import Counter from "./component/counter/counter.component";
+import "./App.scss";
 import GenreSelect from "./component/genre-select/genre-select.component";
 import SearchForm from "./component/search-form/search-form.component";
 import MovieTile from "./component/movie-tile/movie-tile.component";
 import MovieDetails from "./component/movie-details/movie-details.component";
 import SortControl from "./component/sort-control/sort-control.component";
+import AddMovie from "./component/add-movie/add-movie.component";
+import EditMovie from "./component/edit-movie/edit-movie.component";
+import DeleteMovie from "./component/delete-movie/delete-movie.component";
 
 class App extends Component {
   constructor() {
@@ -14,6 +16,7 @@ class App extends Component {
     this.state = {
       selectedGenre: null,
       selectedMovie: {},
+      dialogOpen: false,
       movies: [
         {
           id: 1,
@@ -110,7 +113,12 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <Counter initialValue={10} />
+          <div className="movie-control-button">
+            <AddMovie />
+            <EditMovie />
+            <DeleteMovie />
+          </div>
+          <div id="movie-portal" />
           <SearchForm searchValue={"search movie"} />
           <GenreSelect
             genres={genres}
