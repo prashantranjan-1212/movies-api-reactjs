@@ -1,51 +1,38 @@
 import PropTypes from "prop-types";
-import "./search-form.style.css";
+import "./search-form.style.scss";
+import { useState } from "react";
 
-const SearchForm = ({ searchValue }) => {
-  return (
-    <>
-      <div>
-        <input
-          data-testid="search-input"
-          className="search-box"
-          type="search"
-          placeholder={searchValue}
-          onSelect={(event) => {
-            const inputValue = event.target.value;
-            this.setState(
-              () => {
-                return {
-                  searchValue: inputValue,
-                };
-              },
-              () => {
-                console.log(searchValue);
-              }
-            );
-          }}
-        ></input>
-      </div>
-      <div>
-        <button
-          data-testid="search-button"
-          className="search-button"
-          onClick={(event) => {
-            window.alert(searchValue);
-          }}
-        >
-          Search
-        </button>
-      </div>
-    </>
-  );
+const SearchForm = ({ searchValue, searchHandler }) => {
+	const [select, setSelect] = useState(searchValue);
+
+	const selectHandler = (event) => {
+		const value = event.target.value;
+		setSelect(value);
+	};
+
+	return (
+		<div className="search-form">
+			<input
+				data-testid="search-input"
+				className="search-box"
+				type="search"
+				placeholder={"What do you want to watch?"}
+				onSelect={(event) => selectHandler(event)}
+			></input>
+			<button
+				data-testid="search-button"
+				className="search-button"
+				onClick={() => searchHandler(select)}
+			>
+				Search
+			</button>
+		</div>
+	);
 };
 
 export default SearchForm;
 
 SearchForm.propTypes = {
-  searchValue: PropTypes.string.isRequired,
-};
-
-SearchForm.defaultProps = {
-  searchValue: "Pathan",
+	searchValue: PropTypes.string.isRequired,
+	searchHandler: PropTypes.func.isRequired,
 };

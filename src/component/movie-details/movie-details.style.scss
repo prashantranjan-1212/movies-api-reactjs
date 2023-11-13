@@ -1,0 +1,28 @@
+.movie-details {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	background-color: #ccc;
+	margin: 10px;
+
+	.movie-poster {
+		flex: auto;
+		align-items: start;
+	}
+
+	.movie-info {
+		flex: auto;
+		align-items: end;
+
+		.movie-info-button {
+			background-color: rgb(217 61 61);
+			margin: 10px;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+	}
+}
