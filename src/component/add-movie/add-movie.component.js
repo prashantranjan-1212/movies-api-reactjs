@@ -5,32 +5,35 @@ import MovieForm from "../movie-form/movie-form.component";
 import PropTypes from "prop-types";
 
 const AddMovie = () => {
-  const [dialogOpen, setDialogOpen] = useState(false);
+	const [dialogOpen, setDialogOpen] = useState(false);
 
-  const handleMovieSubmit = (data) => {
-    console.log(data);
-    setDialogOpen(false);
-  };
+	const handleMovieSubmit = (data) => {
+		console.log(data);
+		setDialogOpen(false);
+	};
 
-  return (
-    <div className="add-movie-container" data-testid="add-movie-container">
-      <button
-        className="add-movie-button"
-        data-testid="add-movie-button"
-        onClick={() => setDialogOpen(true)}
-      >
-        Add Movie
-      </button>
-      {dialogOpen && (
-        <Dialog
-          title={"Add Movie"}
-          handleCloseButton={() => setDialogOpen(false)}
-        >
-          <MovieForm onSubmit={handleMovieSubmit}></MovieForm>
-        </Dialog>
-      )}
-    </div>
-  );
+	return (
+		<div
+			className="add-movie-container"
+			data-testid="add-movie-container"
+		>
+			<button
+				className="add-movie-button"
+				data-testid="add-movie-button"
+				onClick={() => setDialogOpen(true)}
+			>
+				ADD MOVIE
+			</button>
+			{dialogOpen && (
+				<Dialog
+					title={"ADD MOVIE"}
+					handleCloseButton={() => setDialogOpen(false)}
+				>
+					<MovieForm onSubmit={handleMovieSubmit}></MovieForm>
+				</Dialog>
+			)}
+		</div>
+	);
 };
 
 export default AddMovie;

@@ -26,7 +26,7 @@ const MovieTile = ({
 					className="movie-tile-view-details-button"
 					onClick={() => onMovieClick(movieName)}
 				>
-					View Details
+					VIEW DETAIL
 				</button>
 			</div>
 		</div>

@@ -1,13 +1,13 @@
 .delete-movie-container {
-  flex-direction: row;
-  margin: 3px;
+	flex-direction: row;
+	margin: 3px;
 
-  .delete-movie-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+	.delete-movie-button {
+		background-color: #007bff;
+		color: white;
+		border: none;
+		padding: 10px 20px;
+		border-radius: 4px;
+		cursor: pointer;
+	}
 }

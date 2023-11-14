@@ -15,10 +15,10 @@ const MovieList = () => {
 	const [selectedMovie, setSelectedMovie] = useState({});
 	const [renderMovieDetailpage, setRenderMovieDetailpage] = useState(false);
 
-	const genres = ["DOCUMENTRY", "COMEDY", "HORROR", "CRIME"];
+	const genres = ["ACTION", "ADVENTURE", "COMEDY", "CRIME", "FAMILY"];
 
 	useEffect(() => {
-		fetch("http://localhost:4000/movies")
+		fetch(`http://localhost:4000/movies`)
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error("failed to fetch.....");
@@ -33,13 +33,41 @@ const MovieList = () => {
 			});
 	}, []);
 
-	const searchHandler = (value) => {
-		setSearchQuery(value);
-	};
+	useEffect(() => {
+		fetch(
+			`http://localhost:4000/movies?searchBy=title&search=${searchQuery}`
+		)
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("failed to fetch.....");
+				}
+				return response.json();
+			})
+			.then((data) => {
+				setMovieList(data.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, [searchQuery]);
 
-	const genreSelectHandler = (genre) => {
-		setActiveGenre(genre);
-	};
+	useEffect(() => {
+		fetch(
+			`http://localhost:4000/movies?searchBy=genres&filter=${activeGenre}`
+		)
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("failed to fetch.....");
+				}
+				return response.json();
+			})
+			.then((data) => {
+				setMovieList(data.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, [activeGenre]);
 
 	const onSortHandler = (value) => {
 		if (value === "RELEASE DATE") {
@@ -92,24 +120,8 @@ const MovieList = () => {
 
 	return (
 		<>
-			<h1 className="movie-list-heading">Movie List Page</h1>
-			<SearchForm
-				searchValue={searchQuery}
-				searchHandler={(value) => searchHandler(value)}
-			/>
-			<div>
-				<GenreSelect
-					genres={genres}
-					selectedGenre={activeGenre}
-					onSelect={genreSelectHandler}
-				/>
-				<SortControl
-					releaseDate={"RELEASE DATE"}
-					title={"TITLE"}
-					onSortControl={onSortHandler}
-				/>
-			</div>
-			{renderMovieDetailpage && (
+			<h1 className="movie-list-heading">MOVIE LIST PAGE</h1>
+			{renderMovieDetailpage ? (
 				<MovieDetails
 					imageUrl={selectedMovie.poster_path}
 					movieName={selectedMovie.title}
@@ -119,7 +131,25 @@ const MovieList = () => {
 					description={selectedMovie.overview}
 					closeMovieDetail={closeMovieDetail}
 				/>
+			) : (
+				<SearchForm
+					searchValue={searchQuery}
+					searchHandler={(value) => setSearchQuery(value)}
+				/>
 			)}
+			<div>
+				<GenreSelect
+					genres={genres}
+					selectedGenre={activeGenre}
+					onSelect={(value) => setActiveGenre(value)}
+				/>
+				<SortControl
+					releaseDate={"RELEASE DATE"}
+					title={"TITLE"}
+					onSortControl={onSortHandler}
+				/>
+			</div>
+
 			<div className="movie-tile-conatiner">
 				{movieList.map((movie) => {
 					return (

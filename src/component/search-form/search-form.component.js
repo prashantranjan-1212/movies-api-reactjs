@@ -3,12 +3,7 @@ import "./search-form.style.scss";
 import { useState } from "react";
 
 const SearchForm = ({ searchValue, searchHandler }) => {
-	const [select, setSelect] = useState(searchValue);
-
-	const selectHandler = (event) => {
-		const value = event.target.value;
-		setSelect(value);
-	};
+	const [searchedValue, setSearchedValue] = useState(searchValue);
 
 	return (
 		<div className="search-form">
@@ -17,14 +12,14 @@ const SearchForm = ({ searchValue, searchHandler }) => {
 				className="search-box"
 				type="search"
 				placeholder={"What do you want to watch?"}
-				onSelect={(event) => selectHandler(event)}
+				onSelect={(event) => setSearchedValue(event.target.value)}
 			></input>
 			<button
 				data-testid="search-button"
 				className="search-button"
-				onClick={() => searchHandler(select)}
+				onClick={() => searchHandler(searchedValue)}
 			>
-				Search
+				SEARCH
 			</button>
 		</div>
 	);
