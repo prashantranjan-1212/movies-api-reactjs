@@ -16,8 +16,12 @@ const MovieTile = ({
 			/>
 			<div className="movie-tile-info">
 				<h2>{movieName}</h2>
-				<p>Release Year: {releaseDate}</p>
-				<p>genres: {genres.join(", ")}</p>
+				<p>
+					<b>Release Year : </b> {releaseDate}
+				</p>
+				<p>
+					<b>genres: </b>genres: {genres.join(", ")}
+				</p>
 				<button
 					className="movie-tile-view-details-button"
 					onClick={() => onMovieClick(movieName)}

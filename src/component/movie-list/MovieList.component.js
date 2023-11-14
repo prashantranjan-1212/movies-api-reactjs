@@ -26,7 +26,6 @@ const MovieList = () => {
 				return response.json();
 			})
 			.then((data) => {
-				console.log(data.data);
 				setMovieList(data.data);
 			})
 			.catch((err) => {
@@ -44,16 +43,15 @@ const MovieList = () => {
 
 	const onSortHandler = (value) => {
 		if (value === "RELEASE DATE") {
-			console.log("Sort By Release Date");
 			sortByReleaseDate();
+			setSortCriterion("RELEASE DATE");
 		} else if (value === "TITLE") {
-			console.log("Sort By Title");
 			sortByTitle();
+			setSortCriterion("TITLE");
 		}
 	};
 
 	const sortByReleaseDate = () => {
-		console.log("sortByReleaseDate function called");
 		const sortedMovieListByReleaseDate = movieList.sort((a, b) => {
 			if (a.release_date < b.release_date) {
 				return -1;
@@ -67,7 +65,6 @@ const MovieList = () => {
 	};
 
 	const sortByTitle = () => {
-		console.log("sortByTitle function called");
 		const sortedMovieListByTitle = movieList.sort((a, b) => {
 			if (a.title < b.title) {
 				return -1;

@@ -20,10 +20,22 @@ const MovieDetails = ({
 			</div>
 			<div className="movie-info">
 				<h2>{movieName}</h2>
-				<p>Release Year : {releaseDate}</p>
-				<p>Rating : {rating}</p>
-				<p>Duartion : {duration}</p>
-				<p>Description : {description}</p>
+				<p>
+					<b>RELEASE YEAR : </b>
+					{releaseDate}
+				</p>
+				<p>
+					<b>RATING : </b>
+					{rating}
+				</p>
+				<p>
+					<b>DURATION : </b>
+					{duration}
+				</p>
+				<p>
+					<b>DESCRIPTION : </b>
+					{description}
+				</p>
 				<button
 					className="movie-info-button"
 					onClick={closeMovieDetail}

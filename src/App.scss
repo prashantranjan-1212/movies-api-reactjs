@@ -11,6 +11,8 @@
 
 		.movie-control-button {
 			display: flex;
+			flex-direction: row;
+			justify-content: end;
 		}
 	}
 }
