@@ -18,7 +18,7 @@ const GenreSelect = ({ genres, selectedGenre, onSelect }) => {
 						}}
 						className="genre-selected-button"
 					>
-						{genre}
+						{genre.toUpperCase()}
 					</button>
 				);
 			})}

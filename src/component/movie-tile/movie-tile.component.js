@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./movie-tile.style.scss";
 import PropTypes from "prop-types";
 
@@ -6,7 +7,7 @@ const MovieTile = ({
 	movieName,
 	releaseDate,
 	genres,
-	onMovieClick,
+	movieSelect,
 }) => {
 	return (
 		<div className="movie-tile-poster">
@@ -20,11 +21,12 @@ const MovieTile = ({
 					<b>Release Year : </b> {releaseDate}
 				</p>
 				<p>
-					<b>genres: </b>genres: {genres.join(", ")}
+					<b>genres: </b>
+					{genres.join(", ")}
 				</p>
 				<button
 					className="movie-tile-view-details-button"
-					onClick={() => onMovieClick(movieName)}
+					onClick={() => movieSelect(movieName)}
 				>
 					VIEW DETAIL
 				</button>
@@ -40,5 +42,5 @@ MovieTile.propTypes = {
 	movieName: PropTypes.string.isRequired,
 	releaseDate: PropTypes.string.isRequired,
 	genres: PropTypes.array.isRequired,
-	onMovieClick: PropTypes.func.isRequired,
+	movieSelect: PropTypes.func.isRequired,
 };

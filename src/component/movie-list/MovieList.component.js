@@ -6,16 +6,29 @@ import GenreSelect from "../genre-select/genre-select.component";
 import SortControl from "../sort-control/sort-control.component";
 import MovieTile from "../movie-tile/movie-tile.component";
 import MovieDetails from "../movie-details/movie-details.component";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 const MovieList = () => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [sortCriterion, setSortCriterion] = useState("");
 	const [activeGenre, setActiveGenre] = useState("");
+
+	const [searchParams, setSearchParams] = useSearchParams();
+	//const [query] = useLocation();
+
 	const [movieList, setMovieList] = useState([]);
 	const [selectedMovie, setSelectedMovie] = useState({});
 	const [renderMovieDetailpage, setRenderMovieDetailpage] = useState(false);
 
-	const genres = ["ACTION", "ADVENTURE", "COMEDY", "CRIME", "FAMILY"];
+	const genres = ["action", "adventure", "comedy", "crime", "family"];
+
+	const movieSearched = searchParams.get("query");
+	const genre = searchParams.get("genre");
+	const sortBy = searchParams.get("sortBy");
+
+	//const prevousMovieSearched = query.get("query");
+	//const previousGenre = query.get("genre");
+	//const previousSortBy = query.get("sortBy");
 
 	useEffect(() => {
 		fetch(`http://localhost:4000/movies`)
@@ -69,49 +82,48 @@ const MovieList = () => {
 			});
 	}, [activeGenre]);
 
-	const onSortHandler = (value) => {
-		if (value === "RELEASE DATE") {
-			sortByReleaseDate();
-			setSortCriterion("RELEASE DATE");
-		} else if (value === "TITLE") {
-			sortByTitle();
-			setSortCriterion("TITLE");
-		}
+	useEffect(() => {
+		fetch(
+			`http://localhost:4000/movies?sortOrder=asc&sortBy=${sortCriterion}`
+		)
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error("failed to fetch.....");
+				}
+				return response.json();
+			})
+			.then((data) => {
+				setMovieList(data.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, [sortCriterion]);
+
+	const sortHandler = (value) => {
+		setSortCriterion(value);
+		setSearchParams({ sortBy: value });
 	};
 
-	const sortByReleaseDate = () => {
-		const sortedMovieListByReleaseDate = movieList.sort((a, b) => {
-			if (a.release_date < b.release_date) {
-				return -1;
-			}
-			if (a.release_date < b.release_date) {
-				return 1;
-			}
-			return 0;
-		});
-		setMovieList(sortedMovieListByReleaseDate);
+	const genreHandler = (value) => {
+		console.log(value);
+		setActiveGenre(value);
+		setSearchParams({ genre: value });
 	};
 
-	const sortByTitle = () => {
-		const sortedMovieListByTitle = movieList.sort((a, b) => {
-			if (a.title < b.title) {
-				return -1;
-			}
-			if (a.title < b.title) {
-				return 1;
-			}
-			return 0;
-		});
-		setMovieList(sortedMovieListByTitle);
+	const movieSearchHandler = (value) => {
+		setSearchQuery(value);
+		setSearchParams({ query: value });
 	};
 
-	const handleMovieClick = (value) => {
+	const movieSelectHandler = (value) => {
 		movieList.forEach((movie) => {
 			if (movie.title === value) {
 				setSelectedMovie(movie);
 				setRenderMovieDetailpage(true);
 			}
 		});
+		window.scrollTo({ top: 130, left: 0, behavior: "auto" });
 	};
 
 	const closeMovieDetail = () => {
@@ -134,19 +146,19 @@ const MovieList = () => {
 			) : (
 				<SearchForm
 					searchValue={searchQuery}
-					searchHandler={(value) => setSearchQuery(value)}
+					searchHandler={movieSearchHandler}
 				/>
 			)}
 			<div>
 				<GenreSelect
 					genres={genres}
 					selectedGenre={activeGenre}
-					onSelect={(value) => setActiveGenre(value)}
+					onSelect={genreHandler}
 				/>
 				<SortControl
-					releaseDate={"RELEASE DATE"}
-					title={"TITLE"}
-					onSortControl={onSortHandler}
+					releaseDate={"release_date"}
+					title={"title"}
+					onSortControl={sortHandler}
 				/>
 			</div>
 
@@ -159,7 +171,7 @@ const MovieList = () => {
 							movieName={movie.title}
 							releaseDate={movie.release_date}
 							genres={movie.genres}
-							onMovieClick={handleMovieClick}
+							movieSelect={movieSelectHandler}
 						/>
 					);
 				})}

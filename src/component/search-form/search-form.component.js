@@ -11,8 +11,14 @@ const SearchForm = ({ searchValue, searchHandler }) => {
 				data-testid="search-input"
 				className="search-box"
 				type="search"
-				placeholder={"What do you want to watch?"}
-				onSelect={(event) => setSearchedValue(event.target.value)}
+				value={
+					searchedValue != null
+						? searchedValue
+						: "What do you want to watch?"
+				}
+				onChange={(event) =>
+					setSearchedValue(event.target.value.toLowerCase())
+				}
 			></input>
 			<button
 				data-testid="search-button"
@@ -28,6 +34,6 @@ const SearchForm = ({ searchValue, searchHandler }) => {
 export default SearchForm;
 
 SearchForm.propTypes = {
-	searchValue: PropTypes.string.isRequired,
+	searchValue: PropTypes.string,
 	searchHandler: PropTypes.func.isRequired,
 };

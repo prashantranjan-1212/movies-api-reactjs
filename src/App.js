@@ -1,3 +1,5 @@
+import { Routes, Route } from "react-router-dom";
+
 import "./App.scss";
 import AddMovie from "./component/add-movie/add-movie.component";
 import EditMovie from "./component/edit-movie/edit-movie.component";
@@ -14,7 +16,12 @@ const App = () => {
 					<DeleteMovie />
 				</div>
 				<div id="movie-portal" />
-				<MovieList />
+				<Routes>
+					<Route
+						path="/"
+						element={<MovieList />}
+					/>
+				</Routes>
 			</div>
 		</div>
 	);
