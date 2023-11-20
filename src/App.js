@@ -1,29 +1,21 @@
 import { Routes, Route } from "react-router-dom";
 
-import "./App.scss";
-import AddMovie from "./component/add-movie/add-movie.component";
-import EditMovie from "./component/edit-movie/edit-movie.component";
-import DeleteMovie from "./component/delete-movie/delete-movie.component";
-import MovieList from "./component/movie-list/MovieList.component";
+import Home from "./routes/home";
+import Select from "./routes/select";
 
 const App = () => {
 	return (
-		<div className="App">
-			<div className="App-header">
-				<div className="movie-control-button">
-					<AddMovie />
-					<EditMovie />
-					<DeleteMovie />
-				</div>
-				<div id="movie-portal" />
-				<Routes>
-					<Route
-						path="/"
-						element={<MovieList />}
-					/>
-				</Routes>
-			</div>
-		</div>
+		<Routes>
+			<Route
+				path="/"
+				element={<Home />}
+			>
+				<Route
+					path="/:movieId"
+					element={<Select />}
+				/>
+			</Route>
+		</Routes>
 	);
 };
 

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "./movie-details.style.scss";
 import PropTypes from "prop-types";
 
@@ -8,7 +10,6 @@ const MovieDetails = ({
 	rating,
 	duration,
 	description,
-	closeMovieDetail,
 }) => {
 	return (
 		<div className="movie-details">
@@ -36,12 +37,12 @@ const MovieDetails = ({
 					<b>DESCRIPTION : </b>
 					{description}
 				</p>
-				<button
-					className="movie-info-button"
-					onClick={closeMovieDetail}
+				<Link
+					className="movie-info-link"
+					to="/"
 				>
 					CLOSE
-				</button>
+				</Link>
 			</div>
 		</div>
 	);

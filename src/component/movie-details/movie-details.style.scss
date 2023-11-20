@@ -17,7 +17,7 @@
 		flex-direction: column;
 		align-items: center;
 
-		.movie-info-button {
+		.movie-info-link {
 			background-color: rgb(217 61 61);
 			margin: 10px;
 			color: white;
@@ -25,6 +25,7 @@
 			padding: 10px 20px;
 			border-radius: 4px;
 			cursor: pointer;
+			text-decoration: none;
 		}
 	}
 }

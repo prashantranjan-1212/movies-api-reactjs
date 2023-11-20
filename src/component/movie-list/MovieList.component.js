@@ -1,24 +1,19 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import "./MovieList.style.scss";
+import { useSearchParams } from "react-router-dom";
+
 import SearchForm from "../search-form/search-form.component";
 import GenreSelect from "../genre-select/genre-select.component";
 import SortControl from "../sort-control/sort-control.component";
 import MovieTile from "../movie-tile/movie-tile.component";
-import MovieDetails from "../movie-details/movie-details.component";
-import { useLocation, useSearchParams } from "react-router-dom";
 
 const MovieList = () => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [sortCriterion, setSortCriterion] = useState("");
 	const [activeGenre, setActiveGenre] = useState("");
+	const [movieList, setMovieList] = useState([]);
 
 	const [searchParams, setSearchParams] = useSearchParams();
-	//const [query] = useLocation();
-
-	const [movieList, setMovieList] = useState([]);
-	const [selectedMovie, setSelectedMovie] = useState({});
-	const [renderMovieDetailpage, setRenderMovieDetailpage] = useState(false);
 
 	const genres = ["action", "adventure", "comedy", "crime", "family"];
 
@@ -106,7 +101,6 @@ const MovieList = () => {
 	};
 
 	const genreHandler = (value) => {
-		console.log(value);
 		setActiveGenre(value);
 		setSearchParams({ genre: value });
 	};
@@ -116,39 +110,20 @@ const MovieList = () => {
 		setSearchParams({ query: value });
 	};
 
-	const movieSelectHandler = (value) => {
-		movieList.forEach((movie) => {
-			if (movie.title === value) {
-				setSelectedMovie(movie);
-				setRenderMovieDetailpage(true);
-			}
+	const scrollHandler = () => {
+		window.scrollTo({
+			top: 130,
+			left: 0,
+			behavior: "auto",
 		});
-		window.scrollTo({ top: 130, left: 0, behavior: "auto" });
-	};
-
-	const closeMovieDetail = () => {
-		setRenderMovieDetailpage(false);
 	};
 
 	return (
 		<>
-			<h1 className="movie-list-heading">MOVIE LIST PAGE</h1>
-			{renderMovieDetailpage ? (
-				<MovieDetails
-					imageUrl={selectedMovie.poster_path}
-					movieName={selectedMovie.title}
-					releaseDate={selectedMovie.release_date}
-					rating={selectedMovie.vote_average}
-					duration={selectedMovie.runtime}
-					description={selectedMovie.overview}
-					closeMovieDetail={closeMovieDetail}
-				/>
-			) : (
-				<SearchForm
-					searchValue={searchQuery}
-					searchHandler={movieSearchHandler}
-				/>
-			)}
+			<SearchForm
+				searchValue={searchQuery}
+				searchHandler={movieSearchHandler}
+			/>
 			<div>
 				<GenreSelect
 					genres={genres}
@@ -167,11 +142,12 @@ const MovieList = () => {
 					return (
 						<MovieTile
 							key={movie.id}
+							movieId={movie.id}
 							imageUrl={movie.poster_path}
 							movieName={movie.title}
 							releaseDate={movie.release_date}
 							genres={movie.genres}
-							movieSelect={movieSelectHandler}
+							scrollUp={scrollHandler}
 						/>
 					);
 				})}

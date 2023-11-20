@@ -1,0 +1,22 @@
+.App {
+	background-color: rgb(39, 37, 37);
+	text-align: center;
+
+	.App-header {
+		min-height: 100vh;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		font-size: calc(10px + 2vmin);
+
+		.movie-control-button {
+			display: flex;
+			flex-direction: row;
+			justify-content: end;
+		}
+
+		.movie-list-heading {
+			color: rgb(217 61 61);
+		}
+	}
+}

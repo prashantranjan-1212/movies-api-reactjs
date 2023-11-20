@@ -3,11 +3,12 @@ import "./movie-tile.style.scss";
 import PropTypes from "prop-types";
 
 const MovieTile = ({
+	movieId,
 	imageUrl,
 	movieName,
 	releaseDate,
 	genres,
-	movieSelect,
+	scrollUp,
 }) => {
 	return (
 		<div className="movie-tile-poster">
@@ -24,12 +25,13 @@ const MovieTile = ({
 					<b>genres: </b>
 					{genres.join(", ")}
 				</p>
-				<button
-					className="movie-tile-view-details-button"
-					onClick={() => movieSelect(movieName)}
+				<Link
+					className="movie-tile-view-details-link"
+					to={`/${movieId}`}
+					onClick={scrollUp}
 				>
-					VIEW DETAIL
-				</button>
+					VIEW DETAILS
+				</Link>
 			</div>
 		</div>
 	);
@@ -38,9 +40,9 @@ const MovieTile = ({
 export default MovieTile;
 
 MovieTile.propTypes = {
+	movieId: PropTypes.number.isRequired,
 	imageUrl: PropTypes.string.isRequired,
 	movieName: PropTypes.string.isRequired,
 	releaseDate: PropTypes.string.isRequired,
 	genres: PropTypes.array.isRequired,
-	movieSelect: PropTypes.func.isRequired,
 };
