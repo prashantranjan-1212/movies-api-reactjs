@@ -11,11 +11,7 @@ const SearchForm = ({ searchValue, searchHandler }) => {
 				data-testid="search-input"
 				className="search-box"
 				type="search"
-				value={
-					searchedValue != null
-						? searchedValue
-						: "What do you want to watch?"
-				}
+				value={searchedValue != null ? searchedValue : ""}
 				onChange={(event) =>
 					setSearchedValue(event.target.value.toLowerCase())
 				}

@@ -22,26 +22,26 @@ const MovieDetails = ({
 			<div className="movie-info">
 				<h2>{movieName}</h2>
 				<p>
-					<b>RELEASE YEAR : </b>
+					<b>Release Date: </b>
 					{releaseDate}
 				</p>
 				<p>
-					<b>RATING : </b>
+					<b>Rating: </b>
 					{rating}
 				</p>
 				<p>
-					<b>DURATION : </b>
+					<b>Duration: </b>
 					{duration}
 				</p>
 				<p>
-					<b>DESCRIPTION : </b>
+					<b>Description: </b>
 					{description}
 				</p>
 				<Link
 					className="movie-info-link"
 					to="/"
 				>
-					CLOSE
+					Close
 				</Link>
 			</div>
 		</div>

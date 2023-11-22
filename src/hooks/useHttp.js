@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 
 export const useHttp = (url, dependencies) => {
-	const [data, setData] = useState(null);
-	const [isLoading, setIsLoading] = useState(false);
+	const [fetchedData, setFetchedData] = useState([]);
 
 	useEffect(() => {
 		console.log(url);
-		setIsLoading(true);
 		fetch(url)
 			.then((response) => {
 				if (!response.ok) {
@@ -15,14 +13,12 @@ export const useHttp = (url, dependencies) => {
 				return response.json();
 			})
 			.then((data) => {
-				setIsLoading(false);
-				setData(data.data);
+				setFetchedData(data.data);
 			})
 			.catch((err) => {
-				setIsLoading(false);
 				console.log(err);
 			});
 	}, dependencies);
 
-	return [isLoading, data];
+	return [fetchedData];
 };

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 import SearchForm from "../search-form/search-form.component";
 import GenreSelect from "../genre-select/genre-select.component";
@@ -14,19 +14,16 @@ const MovieList = () => {
 	const [movieList, setMovieList] = useState([]);
 
 	const [searchParams, setSearchParams] = useSearchParams();
-
-	const genres = ["action", "adventure", "comedy", "crime", "family"];
-
 	const movieSearched = searchParams.get("query");
 	const genre = searchParams.get("genre");
 	const sortBy = searchParams.get("sortBy");
 
-	//const prevousMovieSearched = query.get("query");
-	//const previousGenre = query.get("genre");
-	//const previousSortBy = query.get("sortBy");
+	const genres = ["action", "adventure", "comedy", "crime", "family"];
 
 	useEffect(() => {
-		fetch(`http://localhost:4000/movies`)
+		const url = `http://localhost:4000/movies`;
+		console.log(url);
+		fetch(url)
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error("failed to fetch.....");
@@ -42,9 +39,9 @@ const MovieList = () => {
 	}, []);
 
 	useEffect(() => {
-		fetch(
-			`http://localhost:4000/movies?searchBy=title&search=${searchQuery}`
-		)
+		const url = `http://localhost:4000/movies?searchBy=title&search=${searchQuery}`;
+		console.log(url);
+		fetch(url)
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error("failed to fetch.....");
@@ -60,9 +57,9 @@ const MovieList = () => {
 	}, [searchQuery]);
 
 	useEffect(() => {
-		fetch(
-			`http://localhost:4000/movies?searchBy=genres&filter=${activeGenre}`
-		)
+		const url = `http://localhost:4000/movies?searchBy=genres&filter=${activeGenre}`;
+		console.log(url);
+		fetch(url)
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error("failed to fetch.....");
@@ -78,9 +75,9 @@ const MovieList = () => {
 	}, [activeGenre]);
 
 	useEffect(() => {
-		fetch(
-			`http://localhost:4000/movies?sortOrder=asc&sortBy=${sortCriterion}`
-		)
+		const url = `http://localhost:4000/movies?sortOrder=asc&sortBy=${sortCriterion}`;
+		console.log(url);
+		fetch(url)
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error("failed to fetch.....");
@@ -95,19 +92,36 @@ const MovieList = () => {
 			});
 	}, [sortCriterion]);
 
+	useEffect(() => {
+		if (genre != null && genre != activeGenre) {
+			genreHandler(genre);
+		}
+
+		if (sortBy != null && sortBy != sortCriterion) {
+			sortHandler(sortBy);
+		}
+
+		if (movieSearched != null && movieSearched != searchQuery) {
+			movieSearchHandler(movieSearched);
+		}
+	}, [movieSearched, sortBy, genre]);
+
 	const sortHandler = (value) => {
-		setSortCriterion(value);
+		console.log(`Inside sort Handler: ${value}`);
 		setSearchParams({ sortBy: value });
+		setSortCriterion(value);
 	};
 
 	const genreHandler = (value) => {
-		setActiveGenre(value);
+		console.log(`Inside genre handler : ${value}`);
 		setSearchParams({ genre: value });
+		setActiveGenre(value);
 	};
 
 	const movieSearchHandler = (value) => {
-		setSearchQuery(value);
+		console.log(`Inside movie search hanler ${value}`);
 		setSearchParams({ query: value });
+		setSearchQuery(value);
 	};
 
 	const scrollHandler = () => {
@@ -131,6 +145,7 @@ const MovieList = () => {
 					onSelect={genreHandler}
 				/>
 				<SortControl
+					sortBy={sortCriterion}
 					releaseDate={"release_date"}
 					title={"title"}
 					onSortControl={sortHandler}

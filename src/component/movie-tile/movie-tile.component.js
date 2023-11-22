@@ -19,10 +19,10 @@ const MovieTile = ({
 			<div className="movie-tile-info">
 				<h2>{movieName}</h2>
 				<p>
-					<b>Release Year : </b> {releaseDate}
+					<b>Release Year: </b> {releaseDate}
 				</p>
 				<p>
-					<b>genres: </b>
+					<b>Genres: </b>
 					{genres.join(", ")}
 				</p>
 				<Link
@@ -30,7 +30,7 @@ const MovieTile = ({
 					to={`/${movieId}`}
 					onClick={scrollUp}
 				>
-					VIEW DETAILS
+					View Details
 				</Link>
 			</div>
 		</div>
