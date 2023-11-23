@@ -2,14 +2,13 @@ import "./sort-control.style.scss";
 import PropTypes from "prop-types";
 
 const SortControl = ({ sortBy, releaseDate, title, onSortControl }) => {
-	console.log(sortBy);
 	return (
 		<>
 			<label className="sort-control-label">SORT BY : </label>
 			<select
 				className="sort-control-option"
 				onChange={(event) => onSortControl(event.target.value)}
-				defaultValue={sortBy != null ? sortBy : releaseDate}
+				defaultValue={sortBy !== null ? sortBy : releaseDate}
 			>
 				<option value={title}>TITLE</option>
 				<option value={releaseDate}>RELEASE DATE</option>

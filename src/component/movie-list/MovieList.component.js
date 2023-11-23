@@ -9,7 +9,7 @@ import MovieTile from "../movie-tile/movie-tile.component";
 
 const MovieList = () => {
 	const [searchQuery, setSearchQuery] = useState("");
-	const [sortCriterion, setSortCriterion] = useState("");
+	const [sortCriterion, setSortCriterion] = useState(null);
 	const [activeGenre, setActiveGenre] = useState("");
 	const [movieList, setMovieList] = useState([]);
 
@@ -17,6 +17,10 @@ const MovieList = () => {
 	const movieSearched = searchParams.get("query");
 	const genre = searchParams.get("genre");
 	const sortBy = searchParams.get("sortBy");
+
+	console.log(`Movie Searched query: ${movieSearched}`);
+	console.log(`Genre query: ${genre}`);
+	console.log(`SortBy query: ${sortBy}`);
 
 	const genres = ["action", "adventure", "comedy", "crime", "family"];
 
@@ -93,15 +97,17 @@ const MovieList = () => {
 	}, [sortCriterion]);
 
 	useEffect(() => {
-		if (genre != null && genre != activeGenre) {
+		if (genre !== null && genre !== activeGenre) {
 			genreHandler(genre);
 		}
 
-		if (sortBy != null && sortBy != sortCriterion) {
+		if (sortBy !== null && sortBy !== sortCriterion) {
+			console.log(`Inside useEffect: ${sortBy}`);
+			console.log(`Inside useEffect: ${sortCriterion}`);
 			sortHandler(sortBy);
 		}
 
-		if (movieSearched != null && movieSearched != searchQuery) {
+		if (movieSearched !== null && movieSearched !== searchQuery) {
 			movieSearchHandler(movieSearched);
 		}
 	}, [movieSearched, sortBy, genre]);
