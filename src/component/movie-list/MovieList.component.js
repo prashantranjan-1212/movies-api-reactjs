@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import SearchForm from "../search-form/search-form.component";
 import GenreSelect from "../genre-select/genre-select.component";
@@ -8,24 +8,16 @@ import SortControl from "../sort-control/sort-control.component";
 import MovieTile from "../movie-tile/movie-tile.component";
 
 const MovieList = () => {
-	const [searchQuery, setSearchQuery] = useState("");
-	const [sortCriterion, setSortCriterion] = useState(null);
-	const [activeGenre, setActiveGenre] = useState("");
 	const [movieList, setMovieList] = useState([]);
+	const genres = ["action", "adventure", "comedy", "crime", "family"];
 
 	const [searchParams, setSearchParams] = useSearchParams();
 	const movieSearched = searchParams.get("query");
 	const genre = searchParams.get("genre");
 	const sortBy = searchParams.get("sortBy");
 
-	console.log(`Movie Searched query: ${movieSearched}`);
-	console.log(`Genre query: ${genre}`);
-	console.log(`SortBy query: ${sortBy}`);
-
-	const genres = ["action", "adventure", "comedy", "crime", "family"];
-
 	useEffect(() => {
-		const url = `http://localhost:4000/movies`;
+		const url = getUrl();
 		console.log(url);
 		fetch(url)
 			.then((response) => {
@@ -40,94 +32,24 @@ const MovieList = () => {
 			.catch((err) => {
 				console.log(err);
 			});
-	}, []);
-
-	useEffect(() => {
-		const url = `http://localhost:4000/movies?searchBy=title&search=${searchQuery}`;
-		console.log(url);
-		fetch(url)
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error("failed to fetch.....");
-				}
-				return response.json();
-			})
-			.then((data) => {
-				setMovieList(data.data);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}, [searchQuery]);
-
-	useEffect(() => {
-		const url = `http://localhost:4000/movies?searchBy=genres&filter=${activeGenre}`;
-		console.log(url);
-		fetch(url)
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error("failed to fetch.....");
-				}
-				return response.json();
-			})
-			.then((data) => {
-				setMovieList(data.data);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}, [activeGenre]);
-
-	useEffect(() => {
-		const url = `http://localhost:4000/movies?sortOrder=asc&sortBy=${sortCriterion}`;
-		console.log(url);
-		fetch(url)
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error("failed to fetch.....");
-				}
-				return response.json();
-			})
-			.then((data) => {
-				setMovieList(data.data);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}, [sortCriterion]);
-
-	useEffect(() => {
-		if (genre !== null && genre !== activeGenre) {
-			genreHandler(genre);
-		}
-
-		if (sortBy !== null && sortBy !== sortCriterion) {
-			console.log(`Inside useEffect: ${sortBy}`);
-			console.log(`Inside useEffect: ${sortCriterion}`);
-			sortHandler(sortBy);
-		}
-
-		if (movieSearched !== null && movieSearched !== searchQuery) {
-			movieSearchHandler(movieSearched);
-		}
 	}, [movieSearched, sortBy, genre]);
 
 	const sortHandler = (value) => {
-		console.log(`Inside sort Handler: ${value}`);
-		setSearchParams({ sortBy: value });
-		setSortCriterion(value);
+		const queryParam = removeNullQueryValue();
+		queryParam.set("sortBy", value);
+		setSearchParams(queryParam);
 	};
 
 	const genreHandler = (value) => {
-		console.log(`Inside genre handler : ${value}`);
-		setSearchParams({ genre: value });
-		setActiveGenre(value);
+		const queryParam = removeNullQueryValue();
+		queryParam.set("genre", value);
+		setSearchParams(queryParam);
 	};
 
 	const movieSearchHandler = (value) => {
-		console.log(`Inside movie search hanler ${value}`);
-		setSearchParams({ query: value });
-		setSearchQuery(value);
+		const queryParam = removeNullQueryValue();
+		queryParam.set("query", value);
+		setSearchParams(queryParam);
 	};
 
 	const scrollHandler = () => {
@@ -138,20 +60,85 @@ const MovieList = () => {
 		});
 	};
 
+	const removeNullQueryValue = () => {
+		const array = [];
+		const queryParam = new URLSearchParams(searchParams);
+
+		for (const name of queryParam.keys()) {
+			const value = queryParam.get(name);
+			if (value === "" || value === null) {
+				array.push(name);
+			}
+		}
+
+		array.forEach((val) => {
+			queryParam.delete(val);
+		});
+
+		return queryParam;
+	};
+
+	const getUrl = () => {
+		let url;
+		if (movieSearched === null && genre === null && sortBy === null) {
+			url = `http://localhost:4000/movies`;
+		} else if (
+			movieSearched !== null &&
+			genre === null &&
+			sortBy === null
+		) {
+			url = `http://localhost:4000/movies?searchBy=title&search=${movieSearched}`;
+		} else if (
+			movieSearched === null &&
+			genre !== null &&
+			sortBy === null
+		) {
+			url = `http://localhost:4000/movies?searchBy=genres&filter=${genre}`;
+		} else if (
+			movieSearched === null &&
+			genre === null &&
+			sortBy !== null
+		) {
+			url = `http://localhost:4000/movies?sortOrder=asc&sortBy=${sortBy}`;
+		} else if (
+			movieSearched !== null &&
+			genre !== null &&
+			sortBy === null
+		) {
+			url = `http://localhost:4000/movies?searchBy=title&search=${movieSearched}&filter=${genre}`;
+		} else if (
+			movieSearched !== null &&
+			genre === null &&
+			sortBy !== null
+		) {
+			url = `http://localhost:4000/movies?searchBy=title&search=${movieSearched}&sortOrder=asc&sortBy=${sortBy}`;
+		} else if (
+			movieSearched === null &&
+			genre !== null &&
+			sortBy !== null
+		) {
+			url = `http://localhost:4000/movies?sortOrder=asc&sortBy=${sortBy}&searchBy=genres&filter=${genre}`;
+		} else {
+			url = `http://localhost:4000/movies?searchBy=title&search=${movieSearched}&sortOrder=asc&sortBy=${sortBy}&filter=${genre}`;
+		}
+
+		return url;
+	};
+
 	return (
 		<>
 			<SearchForm
-				searchValue={searchQuery}
+				searchValue={movieSearched}
 				searchHandler={movieSearchHandler}
 			/>
 			<div>
 				<GenreSelect
 					genres={genres}
-					selectedGenre={activeGenre}
+					selectedGenre={genre}
 					onSelect={genreHandler}
 				/>
 				<SortControl
-					sortBy={sortCriterion}
+					sortBy={sortBy}
 					releaseDate={"release_date"}
 					title={"title"}
 					onSortControl={sortHandler}

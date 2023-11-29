@@ -22,6 +22,24 @@ const GenreSelect = ({ genres, selectedGenre, onSelect }) => {
 					</button>
 				);
 			})}
+
+			{/* {genres.map((genre, index) => {
+				return (
+					<Link
+						key={index}
+						style={{
+							backgroundColor:
+								genre === selectedGenre
+									? "DodgerBlue"
+									: "rgb(39, 37, 37)",
+						}}
+						className="genre-selected-button"
+						to={{ pathname: "/", search: `?genre=${genre}` }}
+					>
+						{genre.toUpperCase()}
+					</Link>
+				);
+			})} */}
 		</>
 	);
 };
