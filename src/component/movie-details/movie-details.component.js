@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import "./movie-details.style.scss";
 import PropTypes from "prop-types";
@@ -11,6 +11,26 @@ const MovieDetails = ({
 	duration,
 	description,
 }) => {
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	const removeNullQueryValue = () => {
+		const array = [];
+		const queryParam = new URLSearchParams(searchParams);
+
+		for (const name of queryParam.keys()) {
+			const value = queryParam.get(name);
+			if (value === "" || value === null) {
+				array.push(name);
+			}
+		}
+
+		array.forEach((val) => {
+			queryParam.delete(val);
+		});
+
+		setSearchParams(queryParam);
+	};
+
 	return (
 		<div className="movie-details">
 			<div className="movie-poster">
@@ -39,7 +59,10 @@ const MovieDetails = ({
 				</p>
 				<Link
 					className="movie-info-link"
-					to="/"
+					to={{
+						pathname: "/",
+						search: `?${searchParams}`,
+					}}
 				>
 					Close
 				</Link>

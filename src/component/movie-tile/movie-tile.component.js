@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import "./movie-tile.style.scss";
 import PropTypes from "prop-types";
 
@@ -10,6 +10,26 @@ const MovieTile = ({
 	genres,
 	scrollUp,
 }) => {
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	const removeNullQueryValue = () => {
+		const array = [];
+		const queryParam = new URLSearchParams(searchParams);
+
+		for (const name of queryParam.keys()) {
+			const value = queryParam.get(name);
+			if (value === "" || value === null) {
+				array.push(name);
+			}
+		}
+
+		array.forEach((val) => {
+			queryParam.delete(val);
+		});
+
+		setSearchParams(queryParam);
+	};
+
 	return (
 		<div className="movie-tile-poster">
 			<img
@@ -27,7 +47,10 @@ const MovieTile = ({
 				</p>
 				<Link
 					className="movie-tile-view-details-link"
-					to={`/${movieId}`}
+					to={{
+						pathname: `/${movieId}`,
+						search: `?${searchParams}`,
+					}}
 					onClick={scrollUp}
 				>
 					View Details
