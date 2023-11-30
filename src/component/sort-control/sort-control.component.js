@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const SortControl = ({ sortBy, releaseDate, title, onSortControl }) => {
 	return (
-		<>
+		<div className="sort-control">
 			<label className="sort-control-label">SORT BY : </label>
 			<select
 				className="sort-control-option"
@@ -13,7 +13,7 @@ const SortControl = ({ sortBy, releaseDate, title, onSortControl }) => {
 				<option value={title}>TITLE</option>
 				<option value={releaseDate}>RELEASE DATE</option>
 			</select>
-		</>
+		</div>
 	);
 };
 

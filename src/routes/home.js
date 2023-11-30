@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 import "./home.style.scss";
 
@@ -11,13 +11,20 @@ const Home = () => {
 	return (
 		<div className="App">
 			<div className="App-header">
-				<div className="movie-control-button">
-					<AddMovie />
-					<EditMovie />
-					<DeleteMovie />
+				<div className="header-conatiner">
+					<Link
+						to="/"
+						className="heading"
+					>
+						<b>netflix</b>roulette
+					</Link>
+					<div className="movie-control-button">
+						<AddMovie />
+						<EditMovie />
+						<DeleteMovie />
+					</div>
 				</div>
 				<div id="movie-portal" />
-				<h1 className="movie-list-heading">MOVIE LIST PAGE</h1>
 				<Outlet />
 				<MovieList />
 			</div>

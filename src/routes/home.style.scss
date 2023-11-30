@@ -9,14 +9,25 @@
 		justify-content: center;
 		font-size: calc(10px + 2vmin);
 
-		.movie-control-button {
+		.header-conatiner {
 			display: flex;
 			flex-direction: row;
-			justify-content: end;
-		}
+			justify-content: space-between;
+			margin: 10px;
 
-		.movie-list-heading {
-			color: rgb(217 61 61);
+			.heading {
+				display: flex;
+				color: rgb(217, 61, 61);
+				text-decoration: none;
+				padding: 10px 20px;
+				justify-content: start;
+			}
+
+			.movie-control-button {
+				display: flex;
+				flex-direction: row;
+				justify-content: end;
+			}
 		}
 	}
 }

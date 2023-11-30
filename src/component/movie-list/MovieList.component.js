@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
+import "./MovieList.style.scss";
+
 import SearchForm from "../search-form/search-form.component";
 import GenreSelect from "../genre-select/genre-select.component";
 import SortControl from "../sort-control/sort-control.component";
@@ -131,7 +133,7 @@ const MovieList = () => {
 				searchValue={movieSearched}
 				searchHandler={movieSearchHandler}
 			/>
-			<div>
+			<div className="genre-and-sort-control">
 				<GenreSelect
 					genres={genres}
 					selectedGenre={genre}
