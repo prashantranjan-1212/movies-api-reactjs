@@ -1,28 +1,27 @@
-import "./sort-control.style.css";
+import "./sort-control.style.scss";
 import PropTypes from "prop-types";
 
-const SortControl = ({ releaseDate, title, onSortControl }) => {
-  return (
-    <div>
-      <label>Sort By : </label>
-      <select onChange={(event) => onSortControl(event.target.value)}>
-        <option value={title}>Title</option>
-        <option value={releaseDate}>Release Date</option>
-      </select>
-    </div>
-  );
+const SortControl = ({ sortBy, releaseDate, title, onSortControl }) => {
+	return (
+		<>
+			<label className="sort-control-label">SORT BY : </label>
+			<select
+				className="sort-control-option"
+				onChange={(event) => onSortControl(event.target.value)}
+				defaultValue={sortBy !== null ? sortBy : releaseDate}
+			>
+				<option value={title}>TITLE</option>
+				<option value={releaseDate}>RELEASE DATE</option>
+			</select>
+		</>
+	);
 };
 
 export default SortControl;
 
 SortControl.propTypes = {
-  title: PropTypes.string.isRequired,
-  releaseDate: PropTypes.string.isRequired,
-  onSortControl: PropTypes.func,
-};
-
-SortControl.defaultProps = {
-  title: "Pathan",
-  releaseDate: "",
-  onSortControl: () => {},
+	sortBy: PropTypes.string,
+	title: PropTypes.string.isRequired,
+	releaseDate: PropTypes.string.isRequired,
+	onSortControl: PropTypes.func,
 };
