@@ -2,6 +2,7 @@ import { Link, useSearchParams } from "react-router-dom";
 
 import "./movie-details.style.scss";
 import PropTypes from "prop-types";
+import ButtonLink from "../button-link/button-link.component";
 
 const MovieDetails = ({
 	imageUrl,
@@ -57,7 +58,7 @@ const MovieDetails = ({
 					<b>Description: </b>
 					{description}
 				</p>
-				<Link
+				<ButtonLink
 					className="movie-info-link"
 					to={{
 						pathname: "/",
@@ -65,7 +66,7 @@ const MovieDetails = ({
 					}}
 				>
 					Close
-				</Link>
+				</ButtonLink>
 			</div>
 		</div>
 	);

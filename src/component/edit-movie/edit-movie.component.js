@@ -1,13 +1,27 @@
 import "./edit-movie.style.scss";
+
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 import Dialog from "../dialog/dialog.component";
 import MovieForm from "../movie-form/movie-form.component";
+import ButtonLink from "../button-link/button-link.component";
 
-const EditMovie = () => {
+const EditMovie = ({ movieId }) => {
 	const [dialogOpen, setDialogOpen] = useState(false);
 
 	const handleMovieSubmit = (data) => {
 		console.log(data);
+		setDialogOpen(false);
+	};
+
+	const openDialog = () => {
+		console.log("Edit button dialog open");
+		setDialogOpen(true);
+	};
+
+	const closeDialog = () => {
+		console.log("Edit button dialog close");
 		setDialogOpen(false);
 	};
 
@@ -16,17 +30,18 @@ const EditMovie = () => {
 			className="edit-movie-container"
 			data-testid="edit-movie-container"
 		>
-			<button
+			<ButtonLink
 				className="edit-movie-button"
 				data-testid="edit-movie-button"
-				onClick={() => setDialogOpen(true)}
+				to={{ pathname: `/${movieId}/edit` }}
+				onClick={openDialog}
 			>
 				EDIT MOVIE
-			</button>
+			</ButtonLink>
 			{dialogOpen && (
 				<Dialog
 					title={"EDIT MOVIE"}
-					handleCloseButton={() => setDialogOpen(false)}
+					handleCloseButton={closeDialog}
 				>
 					<MovieForm onSubmit={handleMovieSubmit}></MovieForm>
 				</Dialog>

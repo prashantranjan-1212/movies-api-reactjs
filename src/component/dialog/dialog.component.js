@@ -1,42 +1,55 @@
 import "./dialog.style.scss";
+
 import { Portal } from "react-portal";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import ButtonLink from "../button-link/button-link.component";
 
 const Dialog = ({ title, children, handleCloseButton }) => {
-  return (
-    <Portal
-      node={document && document.getElementById("movie-portal")}
-      data-testid="dialog-portal"
-    >
-      <div className="dialog-conatiner" data-testid="dialog-container">
-        <div className="dialog-title" data-testid="dialog-title">
-          <p>{title}</p>
-          <button
-            className="dialog-button"
-            data-testid="dialog-button"
-            onClick={handleCloseButton}
-          >
-            X
-          </button>
-        </div>
-        <div className="dialog-children" data-testid="dialog-children">
-          {children}
-        </div>
-      </div>
-    </Portal>
-  );
+	return (
+		<Portal
+			node={document && document.getElementById("movie-portal")}
+			data-testid="dialog-portal"
+		>
+			<div
+				className="dialog-conatiner"
+				data-testid="dialog-container"
+			>
+				<div
+					className="dialog-title"
+					data-testid="dialog-title"
+				>
+					<p>{title}</p>
+					<ButtonLink
+						className="dialog-button"
+						data-testid="dialog-button"
+						to={{ pathname: "/" }}
+						onClick={handleCloseButton}
+					>
+						X
+					</ButtonLink>
+				</div>
+				<div
+					className="dialog-children"
+					data-testid="dialog-children"
+				>
+					{children}
+				</div>
+			</div>
+		</Portal>
+	);
 };
 
 export default Dialog;
 
 Dialog.propTypes = {
-  title: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired,
-  handleCloseButton: PropTypes.func.isRequired,
+	title: PropTypes.string.isRequired,
+	children: PropTypes.node.isRequired,
+	handleCloseButton: PropTypes.func.isRequired,
 };
 
 Dialog.defaultProps = {
-  title: "Dialog Title",
-  children: "",
-  handleCloseButton: () => {},
+	title: "Dialog Title",
+	children: null,
+	handleCloseButton: () => {},
 };

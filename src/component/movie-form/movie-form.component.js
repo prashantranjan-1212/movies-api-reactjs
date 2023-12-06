@@ -1,6 +1,8 @@
-import { useState } from "react";
 import "./movie-form.style.scss";
+
+import { useState } from "react";
 import PropTypes from "prop-types";
+import ButtonLink from "../button-link/button-link.component";
 
 const MovieForm = ({ movieInfo, onSubmit }) => {
 	const [title, setTitle] = useState(movieInfo.title || "");
@@ -13,6 +15,7 @@ const MovieForm = ({ movieInfo, onSubmit }) => {
 
 	const handleMovieSubmit = (event) => {
 		event.preventDefault();
+		console.log("Data Submitted");
 		const formData = Object.fromEntries(new FormData(event.target));
 		onSubmit(formData);
 	};
@@ -88,7 +91,14 @@ const MovieForm = ({ movieInfo, onSubmit }) => {
 					name="overview"
 					onChange={(event) => setOverview(event.target.value)}
 				/>
-				<button data-testid="movie-form-submit">SUBMIT</button>
+				<ButtonLink
+					type="submit"
+					value="Submit"
+					data-testid="movie-form-submit"
+					to="/"
+				>
+					SUBMIT
+				</ButtonLink>
 			</form>
 		</div>
 	);

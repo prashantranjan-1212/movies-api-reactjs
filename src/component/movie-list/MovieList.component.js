@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Outlet, useSearchParams } from "react-router-dom";
 
 import "./MovieList.style.scss";
 
@@ -133,6 +133,7 @@ const MovieList = () => {
 				searchValue={movieSearched}
 				searchHandler={movieSearchHandler}
 			/>
+			<Outlet />
 			<div className="genre-and-sort-control">
 				<GenreSelect
 					genres={genres}

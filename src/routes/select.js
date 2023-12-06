@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
+
 import MovieDetails from "../component/movie-details/movie-details.component";
 
 const Select = () => {
