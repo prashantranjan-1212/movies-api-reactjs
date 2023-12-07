@@ -50,18 +50,20 @@ const MovieTile = ({
 					<b>Genres: </b>
 					{genres.join(", ")}
 				</p>
-				<ButtonLink
-					className="movie-tile-view-details-link"
-					to={{
-						pathname: `/${movieId}`,
-						search: `?${searchParams}`,
-					}}
-					onClick={scrollUp}
-				>
-					View Details
-				</ButtonLink>
-				<EditMovie movieId={movieId} />
-				<DeleteMovie movieId={movieId} />
+				<div className="movie-tile-buttons">
+					<Link
+						className="movie-tile-view-details-link"
+						to={{
+							pathname: `/${movieId}`,
+							search: `?${searchParams}`,
+						}}
+						onClick={scrollUp}
+					>
+						VIEW DETAIL
+					</Link>
+					<EditMovie movieId={movieId} />
+					<DeleteMovie movieId={movieId} />
+				</div>
 			</div>
 		</div>
 	);

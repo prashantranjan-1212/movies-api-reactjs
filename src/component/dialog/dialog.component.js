@@ -3,7 +3,6 @@ import "./dialog.style.scss";
 import { Portal } from "react-portal";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import ButtonLink from "../button-link/button-link.component";
 
 const Dialog = ({ title, children, handleCloseButton }) => {
 	return (
@@ -15,19 +14,21 @@ const Dialog = ({ title, children, handleCloseButton }) => {
 				className="dialog-conatiner"
 				data-testid="dialog-container"
 			>
-				<div
-					className="dialog-title"
-					data-testid="dialog-title"
-				>
-					<p>{title}</p>
-					<ButtonLink
+				<div className="dialog-header">
+					<p
+						className="dialog-title"
+						data-testid="dialog-title"
+					>
+						{title}
+					</p>
+					<Link
 						className="dialog-button"
 						data-testid="dialog-button"
-						to={{ pathname: "/" }}
 						onClick={handleCloseButton}
+						to={{ pathname: "/" }}
 					>
 						X
-					</ButtonLink>
+					</Link>
 				</div>
 				<div
 					className="dialog-children"

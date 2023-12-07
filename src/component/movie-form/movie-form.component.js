@@ -3,6 +3,7 @@ import "./movie-form.style.scss";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import ButtonLink from "../button-link/button-link.component";
+import { Link } from "react-router-dom";
 
 const MovieForm = ({ movieInfo, onSubmit }) => {
 	const [title, setTitle] = useState(movieInfo.title || "");
@@ -91,14 +92,15 @@ const MovieForm = ({ movieInfo, onSubmit }) => {
 					name="overview"
 					onChange={(event) => setOverview(event.target.value)}
 				/>
-				<ButtonLink
+				<Link
+					className="form-submit"
 					type="submit"
 					value="Submit"
 					data-testid="movie-form-submit"
-					to="/"
+					to={{ pathname: "/" }}
 				>
 					SUBMIT
-				</ButtonLink>
+				</Link>
 			</form>
 		</div>
 	);

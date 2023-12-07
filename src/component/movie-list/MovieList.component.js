@@ -56,7 +56,7 @@ const MovieList = () => {
 
 	const scrollHandler = () => {
 		window.scrollTo({
-			top: 130,
+			top: 10,
 			left: 0,
 			behavior: "auto",
 		});
@@ -133,7 +133,7 @@ const MovieList = () => {
 				searchValue={movieSearched}
 				searchHandler={movieSearchHandler}
 			/>
-			<Outlet />
+			<div id="movie-portal" />
 			<div className="genre-and-sort-control">
 				<GenreSelect
 					genres={genres}

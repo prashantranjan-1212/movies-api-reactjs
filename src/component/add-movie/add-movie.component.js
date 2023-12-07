@@ -7,44 +7,35 @@ import { Link } from "react-router-dom";
 import ButtonLink from "../button-link/button-link.component";
 
 const AddMovie = () => {
-	const [dialogOpen, setDialogOpen] = useState(false);
+	// const [dialogOpen, setDialogOpen] = useState(false);
 
-	const handleMovieSubmit = (data) => {
-		console.log(data);
-		setDialogOpen(false);
-	};
+	// const handleMovieSubmit = (data) => {
+	// 	console.log(data);
+	// 	setDialogOpen(false);
+	// };
 
-	const openDialog = () => {
-		console.log("Add button dialog open");
-		setDialogOpen(true);
-	};
+	// const openDialog = () => {
+	// 	console.log("Add button dialog open");
+	// 	setDialogOpen(true);
+	// };
 
-	const closeDialog = () => {
-		console.log("Add button dialog close");
-		setDialogOpen(false);
-	};
+	// const closeDialog = () => {
+	// 	console.log("Add button dialog close");
+	// 	setDialogOpen(false);
+	// };
 
 	return (
 		<div
 			className="add-movie-container"
 			data-testid="add-movie-container"
 		>
-			<ButtonLink
+			<Link
 				className="add-movie-button"
 				data-testid="add-movie-button"
 				to={{ pathname: "/new" }}
-				onClick={openDialog}
 			>
 				ADD MOVIE
-			</ButtonLink>
-			{dialogOpen && (
-				<Dialog
-					title={"ADD MOVIE"}
-					handleCloseButton={closeDialog}
-				>
-					<MovieForm onSubmit={handleMovieSubmit}></MovieForm>
-				</Dialog>
-			)}
+			</Link>
 		</div>
 	);
 };
