@@ -1,13 +1,10 @@
-.edit-movie-container {
-  flex-direction: row;
-  margin: 3px;
-
-  .edit-movie-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+.edit-movie-button {
+	background-color: rgb(217 61 61);
+	text-decoration: none;
+	color: white;
+	border: none;
+	padding: 2px 2px;
+	border-radius: 4px;
+	cursor: pointer;
+	margin: 10px;
 }

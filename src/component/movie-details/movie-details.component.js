@@ -64,7 +64,7 @@ const MovieDetails = ({
 						search: `?${searchParams}`,
 					}}
 				>
-					Close
+					CLOSE
 				</Link>
 			</div>
 		</div>

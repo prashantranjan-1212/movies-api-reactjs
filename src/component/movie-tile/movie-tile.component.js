@@ -1,6 +1,11 @@
-import { Link, useSearchParams } from "react-router-dom";
 import "./movie-tile.style.scss";
+
+import { Link, useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
+
+import EditMovie from "../edit-movie/edit-movie.component";
+import DeleteMovie from "../delete-movie/delete-movie.component";
+import ButtonLink from "../button-link/button-link.component";
 
 const MovieTile = ({
 	movieId,
@@ -45,16 +50,20 @@ const MovieTile = ({
 					<b>Genres: </b>
 					{genres.join(", ")}
 				</p>
-				<Link
-					className="movie-tile-view-details-link"
-					to={{
-						pathname: `/${movieId}`,
-						search: `?${searchParams}`,
-					}}
-					onClick={scrollUp}
-				>
-					View Details
-				</Link>
+				<div className="movie-tile-buttons">
+					<Link
+						className="movie-tile-view-details-link"
+						to={{
+							pathname: `/${movieId}`,
+							search: `?${searchParams}`,
+						}}
+						onClick={scrollUp}
+					>
+						VIEW DETAIL
+					</Link>
+					<EditMovie movieId={movieId} />
+					<DeleteMovie movieId={movieId} />
+				</div>
 			</div>
 		</div>
 	);

@@ -1,46 +1,18 @@
 import "./delete-movie.style.scss";
-import { useState } from "react";
-import Dialog from "../dialog/dialog.component";
 
-const DeleteMovie = () => {
-	const [dialogOpen, setDialogOpen] = useState(false);
+import { Link } from "react-router-dom";
 
-	const handleDeleteMovie = () => {
-		console.log("Deleting Movie...");
-		setDialogOpen(false);
-	};
+const DeleteMovie = ({ movieId }) => {
 	return (
-		<div
-			className="delete-movie-container"
-			data-testid="delete-movie-container"
-		>
-			<button
+		<>
+			<Link
 				className="delete-movie-button"
 				data-testid="delete-movie-button"
-				onClick={() => setDialogOpen(true)}
+				to={{ pathname: `/${movieId}/delete` }}
 			>
 				DELETE MOVIE
-			</button>
-			{dialogOpen && (
-				<Dialog
-					title={"DELETE MOVIE"}
-					handleCloseButton={() => setDialogOpen(false)}
-				>
-					<p data-testid="delete-movie-confirm-text">
-						<em>
-							<b>Are you sure you want to delete this movie?</b>
-						</em>
-					</p>
-					<button
-						className="delete-movie-confirm-button"
-						data-testid="delete-movie-confirm-button"
-						onClick={handleDeleteMovie}
-					>
-						Confirm
-					</button>
-				</Dialog>
-			)}
-		</div>
+			</Link>
+		</>
 	);
 };
 

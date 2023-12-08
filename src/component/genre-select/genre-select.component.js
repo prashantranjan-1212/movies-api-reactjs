@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 
 const GenreSelect = ({ genres, selectedGenre, onSelect }) => {
 	return (
-		<>
+		<div className="genre-button">
 			{genres.map((genre, index) => {
 				return (
 					<button
+						className="genre-selected-button"
 						key={index}
 						data-testid={genre}
 						onClick={() => onSelect(genre)}
@@ -16,31 +17,12 @@ const GenreSelect = ({ genres, selectedGenre, onSelect }) => {
 									? "DodgerBlue"
 									: "rgb(39, 37, 37)",
 						}}
-						className="genre-selected-button"
 					>
 						{genre.toUpperCase()}
 					</button>
 				);
 			})}
-
-			{/* {genres.map((genre, index) => {
-				return (
-					<Link
-						key={index}
-						style={{
-							backgroundColor:
-								genre === selectedGenre
-									? "DodgerBlue"
-									: "rgb(39, 37, 37)",
-						}}
-						className="genre-selected-button"
-						to={{ pathname: "/", search: `?genre=${genre}` }}
-					>
-						{genre.toUpperCase()}
-					</Link>
-				);
-			})} */}
-		</>
+		</div>
 	);
 };
 

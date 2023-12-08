@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Outlet, useSearchParams } from "react-router-dom";
+
+import "./MovieList.style.scss";
 
 import SearchForm from "../search-form/search-form.component";
 import GenreSelect from "../genre-select/genre-select.component";
@@ -54,7 +56,7 @@ const MovieList = () => {
 
 	const scrollHandler = () => {
 		window.scrollTo({
-			top: 130,
+			top: 10,
 			left: 0,
 			behavior: "auto",
 		});
@@ -131,7 +133,8 @@ const MovieList = () => {
 				searchValue={movieSearched}
 				searchHandler={movieSearchHandler}
 			/>
-			<div>
+			<div id="movie-portal" />
+			<div className="genre-and-sort-control">
 				<GenreSelect
 					genres={genres}
 					selectedGenre={genre}
