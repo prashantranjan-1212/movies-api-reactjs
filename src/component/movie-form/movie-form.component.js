@@ -4,24 +4,24 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
 
-const MovieForm = ({ movieInfo, onSubmit }) => {
-	const [register, handleSubmit] = useForm();
-	const [data, setData] = useState("");
+const MovieForm = ({ movieInfo, submit }) => {
+	const form = useForm();
+	const { register, control, handleSubmit, formState } = form;
+	const { errors } = formState;
 
-	const [title, setTitle] = useState(movieInfo.title || "");
-	const [releaseDate, setReleaseDate] = useState(movieInfo.releaseDate || "");
-	const [movieUrl, setMovieUrl] = useState(movieInfo.movieUrl || "");
-	const [rating, setRating] = useState(movieInfo.rating || "");
-	const [genre, setGenre] = useState(movieInfo.genre || "");
-	const [runtime, setRuntime] = useState(movieInfo.runtime || "");
-	const [overview, setOverview] = useState(movieInfo.overview || "");
+	const title = movieInfo !== null ? movieInfo.title : "";
+	const release_date = movieInfo !== null ? movieInfo.release_date : "";
+	const poster_path = movieInfo !== null ? movieInfo.poster_path : "";
+	const vote_average = movieInfo !== null ? movieInfo.vote_average : "";
+	const genres = movieInfo !== null ? movieInfo.genres : "";
+	const runtime = movieInfo !== null ? movieInfo.runtime : "";
+	const overview = movieInfo !== null ? movieInfo.overview : "";
 
-	const handleMovieSubmit = (event) => {
-		event.preventDefault();
-		console.log("Data Submitted");
-		const formData = Object.fromEntries(new FormData(event.target));
-		onSubmit(formData);
+	const handleMovieSubmit = (data) => {
+		console.log("Data Submitted", data);
+		submit(data);
 	};
 
 	return (
@@ -29,99 +29,195 @@ const MovieForm = ({ movieInfo, onSubmit }) => {
 			className="movie-form-container"
 			data-testid="movie-form-container"
 		>
-			<form
-				onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))}
-			>
-				<label data-testid="title-label">TITLE</label>
-				<input
-					data-testid="title-input"
-					type="text"
-					name="title"
-					placeholder="Movie Title "
-					{...register("title", {
-						required: true,
-						onChange: (event) => setTitle(event.target.value),
-					})}
-				></input>
-				<label data-testid="release-date-label">RELEASE DATE</label>
-				<input
-					data-testid="release-date-input"
-					type="date"
-					name="releaseDate"
-					{...register("releaseDate", {
-						required: true,
-						valueAsDate: true,
-						onChange: (event) => setReleaseDate(event.target.value),
-					})}
-				></input>
-				<label data-testid="movie-url-label">MOVIE URL</label>
-				<input
-					data-testid="movie-url-input"
-					type="url"
-					name="movieUrl"
-					{...register("movieUrl", {
-						required: true,
-						onChange: (event) => setMovieUrl(event.target.value),
-					})}
-				></input>
-				<label data-testid="rating-label">RATING</label>
-				<input
-					data-testid="rating-input"
-					type="number"
-					name="rating"
-					min="0"
-					max="10"
-					{...register("rating", {
-						required: true,
-						onChange: (event) => setRating(event.target.value),
-					})}
-				></input>
-				<label data-testid="genre-label">GENRE</label>
-				<select
-					data-testid="genre-select"
-					name="genre"
-					{...register("genre", {
-						required: true,
-						onChange: (event) => setGenre(event.target.value),
-					})}
-				>
-					<option value="Comedy">Comedy</option>
-					<option value="Fantasy">Fantasy</option>
-					<option value="Thriller">Thriller</option>
-					<option value="Action">Action</option>
-					<option value="Documentary">Documentary</option>
-					<option value="Adventure">Adventure</option>
-					<option value="Sci-Fi">Sci-Fi</option>
-				</select>
-				<label data-testid="runtime-label">RUNTIME</label>
-				<input
-					data-testid="runtime-input"
-					type="text"
-					name="runtime"
-					{...register("runtime", {
-						required: true,
-						onChange: (event) => setRuntime(event.target.value),
-					})}
-				></input>
-				<label data-testid="overview-label">OVERVIEW</label>
-				<textarea
-					data-testid="overview-textarea"
-					name="overview"
-					{...register("overview", {
-						required: true,
-						onChange: (event) => setOverview(event.target.value),
-					})}
-				/>
-				<Link
-					className="form-submit"
-					type="submit"
-					value="Submit"
-					data-testid="movie-form-submit"
-					to={{ pathname: "/" }}
-				>
-					SUBMIT
-				</Link>
+			<form onSubmit={handleSubmit(handleMovieSubmit)}>
+				<div className="form-controls">
+					<label
+						htmlFor="title"
+						data-testid="title-label"
+					>
+						TITLE
+					</label>
+					<input
+						data-testid="title-input"
+						type="text"
+						id="title"
+						defaultValue={title}
+						placeholder="Movie Title"
+						{...register("title", {
+							required: {
+								value: true,
+								message: "Title is a required feild",
+							},
+						})}
+					></input>
+					<p className="form-error-message">
+						{errors.title?.message}
+					</p>
+				</div>
+				<div className="form-controls">
+					<label
+						htmlFor="release_date"
+						data-testid="release-date-label"
+					>
+						RELEASE DATE
+					</label>
+					<input
+						data-testid="release-date-input"
+						type="date"
+						defaultValue={release_date}
+						id="release_date"
+						{...register("release_date", {
+							required: {
+								value: true,
+								message: "Realease Date is a required feild",
+							},
+							valueAsDate: {
+								valueAsDate: true,
+								message: "Realease Date must be a date",
+							},
+						})}
+					></input>
+					<p className="form-error-message">
+						{errors.release_date?.message}
+					</p>
+				</div>
+				<div className="form-controls">
+					<label
+						htmlFor="poster_path"
+						data-testid="movie-url-label"
+					>
+						MOVIE URL
+					</label>
+					<input
+						data-testid="movie-url-input"
+						type="url"
+						id="poster_path"
+						defaultValue={poster_path}
+						{...register("poster_path", {
+							required: {
+								value: true,
+								message: "Movie URL is a required feild",
+							},
+						})}
+					></input>
+					<p className="form-error-message">
+						{errors.poster_path?.message}
+					</p>
+				</div>
+				<div className="form-controls">
+					<label
+						htmlFor="vote_average"
+						data-testid="rating-label"
+					>
+						RATING
+					</label>
+					<input
+						data-testid="rating-input"
+						type="number"
+						id="vote_average"
+						defaultValue={vote_average}
+						min="0"
+						max="10"
+						step={1}
+						{...register("vote_average", {
+							required: {
+								value: true,
+								message: "Rating is a required feild",
+							},
+						})}
+					></input>
+					<p className="form-error-message">
+						{errors.vote_average?.message}
+					</p>
+				</div>
+				<div className="form-controls">
+					<label
+						htmlFor="genres"
+						data-testid="genre-label"
+					>
+						GENRE
+					</label>
+					<select
+						data-testid="genre-select"
+						id="genres"
+						defaultValue={genres}
+						multiple={true}
+						{...register("genres", {
+							required: {
+								value: true,
+								message: "Genre is a required feild",
+							},
+						})}
+					>
+						<option value="Comedy">Comedy</option>
+						<option value="Fantasy">Fantasy</option>
+						<option value="Thriller">Thriller</option>
+						<option value="Action">Action</option>
+						<option value="Documentary">Documentary</option>
+						<option value="Adventure">Adventure</option>
+						<option value="Sci-Fi">Sci-Fi</option>
+					</select>
+					<p className="form-error-message">
+						{errors.genres?.message}
+					</p>
+				</div>
+				<div className="form-controls">
+					<label
+						htmlFor="runtime"
+						data-testid="runtime-label"
+					>
+						RUNTIME
+					</label>
+					<input
+						data-testid="runtime-input"
+						type="number"
+						id="runtime"
+						defaultValue={runtime}
+						{...register("runtime", {
+							required: {
+								value: true,
+								message: "Runtime is a required feild",
+							},
+						})}
+					></input>
+					<p className="form-error-message">
+						{errors.runtime?.message}
+					</p>
+				</div>
+				<div className="form-controls">
+					<label
+						htmlFor="overview"
+						data-testid="overview-label"
+					>
+						OVERVIEW
+					</label>
+					<textarea
+						data-testid="overview-textarea"
+						id="overview"
+						defaultValue={overview}
+						{...register("overview", {
+							required: {
+								value: true,
+								message: "Overview is a required feild",
+							},
+						})}
+					/>
+					<p className="form-error-message">
+						{errors.overview?.message}
+					</p>
+				</div>
+				<div className="form-controls">
+					<button
+						className="form-submit-button"
+						type="submit"
+						value="Submit"
+						data-testid="movie-form-submit"
+					>
+						SUBMIT
+					</button>
+				</div>
 			</form>
+			<DevTool control={control} />
 		</div>
 	);
 };

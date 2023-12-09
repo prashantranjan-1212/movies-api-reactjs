@@ -26,8 +26,8 @@
 		border-radius: 4px;
 	}
 
-	button {
-		background-color: #007bff;
+	.form-submit-button {
+		background-color: rgb(217 61 61);
 		color: white;
 		border: none;
 		padding: 10px 20px;
@@ -35,7 +35,7 @@
 		cursor: pointer;
 	}
 
-	.form-submit {
+	.form-close-link {
 		background-color: rgb(217 61 61);
 		text-decoration: none;
 		color: white;
@@ -44,5 +44,11 @@
 		border-radius: 4px;
 		cursor: pointer;
 		margin: 10px;
+	}
+
+	.form-error-message {
+		color: rgb(217 61 61);
+		text-align: center;
+		font-weight: bold;
 	}
 }
