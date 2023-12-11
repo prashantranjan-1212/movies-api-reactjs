@@ -51,7 +51,7 @@ const EditMovie = () => {
 				return response.json();
 			})
 			.then((data) => {
-				console(`Fetched Data: ${data}`);
+				console("Fetched Data: ", data);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -59,9 +59,27 @@ const EditMovie = () => {
 	}, [formData]);
 
 	const handleMovieSubmit = (data) => {
-		console.log(data);
+		console.log("Form Data: ", data);
+		const formattedDate = formatDate(data);
+		const rating = data.vote_average;
+		const runtime = data.runtime;
+		data.vote_average = Number(rating);
+		data.runtime = Number(runtime);
+		data.release_date = formattedDate;
+		console.log("Formatted Date: ", data);
 		setFormData(data);
 		setDialogOpen(false);
+	};
+
+	const formatDate = (data) => {
+		const date = data.release_date;
+		const year = date.getFullYear();
+		const month = date.getMonth() + 1;
+		const day = date.getDate();
+		const formattedMonth = month < 10 ? `0${month}` : `${month}`;
+		const formattedDay = day < 10 ? `0${day}` : `${day}`;
+		const formattedDate = `${year}-${formattedMonth}-${formattedDay}`;
+		return formattedDate;
 	};
 
 	const closeDialog = () => {
