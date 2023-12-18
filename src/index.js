@@ -1,12 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import ReactDOmClient from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 
-const root = ReactDOM.hydrateRoot(document.getElementById("root"));
-root.render(
+// const root = ReactDOM.hydrateRoot(document.getElementById("root"));
+// root.render(
+// 	<React.StrictMode>
+// 		<BrowserRouter>
+// 			<App />
+// 		</BrowserRouter>
+// 	</React.StrictMode>
+// );
+
+ReactDOmClient.hydrateRoot(
+	document.getElementById("root"),
 	<React.StrictMode>
 		<BrowserRouter>
 			<App />
